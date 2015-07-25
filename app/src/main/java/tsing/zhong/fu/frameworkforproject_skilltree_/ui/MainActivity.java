@@ -1,5 +1,6 @@
 package tsing.zhong.fu.frameworkforproject_skilltree_.ui;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tsing.zhong.fu.frameworkforproject_skilltree_.MyAdapter;
+import tsing.zhong.fu.frameworkforproject_skilltree_.MyApplication;
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
 
 
@@ -45,6 +47,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initializeToolbar();
+
+        MyApplication app = (MyApplication) getApplication();
+        app.setMainActivity(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.main_recycler_view);
         mRecyclerView.setHasFixedSize(true);

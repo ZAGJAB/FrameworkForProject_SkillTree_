@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/MyApplication.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/model/Courses.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/model/User.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/model/UserResourceImpl.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/ui/ActionBarActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/ui/DrawerMenuContents.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/ui/ScrimInsetsRelativeLayout.java" charset="UTF-8" />

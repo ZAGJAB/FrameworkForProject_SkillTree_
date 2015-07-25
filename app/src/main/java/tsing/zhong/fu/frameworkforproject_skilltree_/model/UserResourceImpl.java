@@ -7,122 +7,122 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.ui.ListActivity;
 /**
  * Created by fuzho on 2015/7/25.
  *
- * Í¨¹ıÍøÂç»ñÈ¡ÓÃ»§×ÊÔ´
+ * é€šè¿‡ç½‘ç»œè·å–ç”¨æˆ·èµ„æº
  *
  */
 abstract class UserResourceImpl {
 
 
     /**
-     * ¼ì²éÓÃ»§ÊÇ·ñ´æÔÚ
-     * @param uName ÓÃ»§Ãû
-     * @return ²¼¶ûÖµ ÊÇ·ñ´æÔÚ
+     * æ£€æŸ¥ç”¨æˆ·æ˜¯å¦å­˜åœ¨
+     * @param uName ç”¨æˆ·å
+     * @return å¸ƒå°”å€¼ æ˜¯å¦å­˜åœ¨
      */
     public abstract boolean isExistUser(String uName);
 
     /**
-     * ¼ì²éÍøÂç×´Ì¬
-     * @return 10 Õı³£
-     * @return 11 Òì³£
+     * æ£€æŸ¥ç½‘ç»œçŠ¶æ€
+     * @return 10 æ­£å¸¸
+     * @return 11 å¼‚å¸¸
      */
     public abstract int     netStatus();
 
     /**
-     * µÇÂ½
+     * ç™»é™†
      * @param uName
      * @param pwd
-     * @return ×´Ì¬Âë/ÓÃ»§id
+     * @return çŠ¶æ€ç /ç”¨æˆ·id
      *
      */
     public abstract int     Login(String uName, String pwd);
 
     /**
-     * Detail ½á¹¹¼û {@link User}
+     * Detail ç»“æ„è§ {@link User}
      * @param Uid
      * @return {@link tsing.zhong.fu.frameworkforproject_skilltree_.model.User.Detail}
      */
     public abstract User.Detail getDetail(String Uid);
 
     /**
-     * »ñÈ¡ÊÕ²Ø
+     * è·å–æ”¶è—
      * @param Uid
      * @return
      */
     public abstract List<String> getBookmarks(String Uid);
 
     /**
-     * ¸ù¾İÓÃ»§Ãû»ñÈ¡¿Î³ÌidµÄ¼¯ºÏ
+     * æ ¹æ®ç”¨æˆ·åè·å–è¯¾ç¨‹idçš„é›†åˆ
      * @param Uid
-     * @return ¿Î³Ìid¼¯ºÏ
+     * @return è¯¾ç¨‹idé›†åˆ
      */
     public abstract List<String> getCoursesId(String Uid);
 
     /**
-     * »ñÈ¡ÈÈÃÅ¿Î³Ì
-     * @return ¿Î³Ìid¼¯ºÏ
+     * è·å–çƒ­é—¨è¯¾ç¨‹
+     * @return è¯¾ç¨‹idé›†åˆ
      */
     public abstract List<String> getHotCoursesId();
 
     /**
-     * Í¨¹ıÖÖÀà»ñÈ¡ÈÈÃÅÎÊÌâ
+     * é€šè¿‡ç§ç±»è·å–çƒ­é—¨é—®é¢˜
      * @param Kind todo: discuz
-     * @return ÎÊÌâid¼¯ºÏ
+     * @return é—®é¢˜idé›†åˆ
      */
     public abstract List<String> getHotCoursesIdByDepart(String Kind);
 
     /**
-     * Í¨¹ı¹Ø¼ü×ÖËÑË÷
-     * @param keyWord ¹Ø¼ü×Ö
-     * @return ÎÊÌâid¼¯ºÏ
+     * é€šè¿‡å…³é”®å­—æœç´¢
+     * @param keyWord å…³é”®å­—
+     * @return é—®é¢˜idé›†åˆ
      */
     public abstract List<String> searchByKeyWord(String keyWord);
 
     /**
-     * Uid Ìí¼ÓCourse¿Î³Ì,Èç¹û´æÔÚ¿Î³Ì·µ»Ø½ø¶È(µÚ¼¸½Ú)
+     * Uid æ·»åŠ Courseè¯¾ç¨‹,å¦‚æœå­˜åœ¨è¯¾ç¨‹è¿”å›è¿›åº¦(ç¬¬å‡ èŠ‚)
      * @param Uid
      * @param Cid
-     * @return ×´Ì¬Öµ °üÀ¨ ³É¹¦/Ê§°Ü{Ê§°ÜÔ­Òò}
+     * @return çŠ¶æ€å€¼ åŒ…æ‹¬ æˆåŠŸ/å¤±è´¥{å¤±è´¥åŸå› }
      */
     public abstract int          addCourse(String Uid,String Cid);
 
     /**
-     * É¾³ı¿Î³Ì
+     * åˆ é™¤è¯¾ç¨‹
      * @param Uid
      * @param Cid
-     * @return ÊÇ·ñÉ¾³ı³É¹¦
+     * @return æ˜¯å¦åˆ é™¤æˆåŠŸ
      */
     public abstract int          delCourse(String Uid,String Cid);
 
     /**
-     * ¸ù¾İccid Ëæ»ú»ñÈ¡10¸öÎÊÌâ
+     * æ ¹æ®ccid éšæœºè·å–10ä¸ªé—®é¢˜
      * @param Ccid
-     * @return ÎÊÌâid¼¯
+     * @return é—®é¢˜idé›†
      */
     public abstract List<String> getQuestionsId(String Ccid);
 
     /**
-     * ¸ù¾İCid»ñÈ¡ÏêÏ¸µÄ¿Î³ÌÄÚÈİ
+     * æ ¹æ®Cidè·å–è¯¦ç»†çš„è¯¾ç¨‹å†…å®¹
      * @param Cid
      * @return
      */
     public abstract Courses      getCourse(String Cid);
 
     /**
-     * ¸ù¾İCcid»ñÈ¡¿Î³ÌÏêÏ¸ÄÚÈİ
+     * æ ¹æ®Ccidè·å–è¯¾ç¨‹è¯¦ç»†å†…å®¹
      * @param Ccid
      * @return
      */
     public abstract Class        getClass(String Ccid);
 
     /**
-     * ¸ù¾İQid»ñÈ¡ÎÊÌâÏêÏ¸ÄÚÈİ
+     * æ ¹æ®Qidè·å–é—®é¢˜è¯¦ç»†å†…å®¹
      * @param Qid
      * @return
      */
     public abstract Question     getQuestion(String Qid);
 
     /**
-     * ¸ù¾İQid»ñÈ¡ÎÊÌâÏêÏ¸ÄÚÈİ
+     * æ ¹æ®Qidè·å–é—®é¢˜è¯¦ç»†å†…å®¹
      * @param Cid
      * @return
      */
@@ -130,35 +130,35 @@ abstract class UserResourceImpl {
 
 
     /**
-     * ¸ù¾İComId»ñÈ¡Commit
+     * æ ¹æ®ComIdè·å–Commit
      * @param ComId
      * @return
      */
     public abstract Commit       getCommit(String ComId);
 
     /**
-     * ÆÀÂÛÄ³¸ö¿Î³Ì
+     * è¯„è®ºæŸä¸ªè¯¾ç¨‹
      * @param Cid
      * @return
      */
     public abstract int          commitToCourse(String Cid);
 
     /**
-     * ÊÕ²Ø
+     * æ”¶è—
      * @param Cid
      * @return
      */
     public abstract int          bookmarkToCourse(String Uid,String Cid);
 
     /**
-     * µãÔŞ
+     * ç‚¹èµ
      * @param Cid
      * @return
      */
     public abstract int          likeToCourse(String Cid);
 
     /**
-     * È¡ÏûµãÔŞ
+     * å–æ¶ˆç‚¹èµ
      * @param Cid
      * @return
      */

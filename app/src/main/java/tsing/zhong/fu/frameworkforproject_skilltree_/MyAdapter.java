@@ -1,17 +1,21 @@
 package tsing.zhong.fu.frameworkforproject_skilltree_;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Random;
 
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.MainActivity;
+import tsing.zhong.fu.frameworkforproject_skilltree_.utils.Loger;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<String> data;
@@ -32,6 +36,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
 
+
+        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("fzq", "clicked!!");
+                Toast.makeText(MyApplication.mainActivity,"clicked!!",Toast.LENGTH_LONG).show();
+            }
+        });
         viewHolder.text.setText(data.get(i));
         int rd = new Random().nextInt(6);
         switch (rd){
@@ -62,6 +74,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     static class ViewHolder extends RecyclerView.ViewHolder {
         View main;
         TextView text;
+        ImageView imageView;
         LinearLayout content;
 
         public ViewHolder(View itemView) {
@@ -70,6 +83,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             main = itemView;
             text = (TextView) itemView.findViewById(R.id.text);
             content = (LinearLayout) itemView.findViewById(R.id.contentPic);
+            imageView = (ImageView) itemView.findViewById(R.id.card_icon_1);
         }
     }
 }
