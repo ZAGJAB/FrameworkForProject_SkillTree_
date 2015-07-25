@@ -2,12 +2,13 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/MyAdapter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/MyApplication.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/model/Courses.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/model/User.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/ui/ActionBarActivity.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/ui/DrawerMenuContents.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/ui/ScrimInsetsRelativeLayout.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/tsing/zhong/fu/frameworkforproject_skilltree_/utils/ResourceHelper.java" charset="UTF-8" />
-    <file url="PROJECT" charset="GBK" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
