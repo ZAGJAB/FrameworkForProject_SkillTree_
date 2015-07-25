@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">_SkillTree_</string>
+    <string name="activity_main">课程进度</string>
+    <string name="activity_sec">列表测试</string>
+    <string name="coursecard_defalut0">课程种类</string>
+    <string name="coursecard_defalut1">课程标题</string>
+    <string name="coursecard_defalut2">#子标题</string>
+    <string name="test_name">付忠庆</string>
+    <string name="sig">写一些个性签名什么的 (雾</string>
+    <string name="chinesetest">中文测试</string>
+    <string name="cast_application_id">CC1AD845</string>
+    <string name="home_title">Home</string>
+    <string name="related_content_header">You may also like</string>
+    <string name="action_listen">Listen</string>
+    <string name="open_content_drawer">Open the main menu</string>
+    <string name="close_content_drawer">Close the main menu</string>
+    <string name="placeholder_message">此功能正在开发中...</string>
+    <string name="drawer_allmusic_title">All Music</string>
+    <string name="drawer_playlists_title">Playlists</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="background_image_str">Background image for album art</string>
+    <string name="no_search_results">No search results.</string>
+    <string name="loading">Loading…</string>
+    <string name="media_route_menu_title">Play on…</string>
+</resources>

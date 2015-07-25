@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+
+    <color name="card_title_1">#E5CCCCCC</color>
+    <color name="card_title_2">#FFFFFF</color>
+    <color name="card_title_3">#FFFFCC</color>
+    <color name="background_gradient_end">#DDDDDD</color>
+    <color name="default_background">#FFFFFF</color>
+    <color name="fab_primary">#3F51B5</color>
+    <color name="fab_primary_pressed">#3F51B5</color>
+    <color name="fab_ripple">#ccc</color>
+
+    <color name="drawer_item_selected_background">#feee</color>
+    <color name="drawer_item_tint_color">#ff333333</color>
+
+</resources>
