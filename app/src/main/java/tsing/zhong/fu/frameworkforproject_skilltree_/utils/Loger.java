@@ -10,7 +10,7 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.BuildConfig;
 
 /*运行时记录器*/
 public class Loger {
-    private static final String LOG_PREFIX = "fzq";
+    private static final String LOG_PREFIX = "SKL";
     private static final int LOG_PREFIX_LENGTH = LOG_PREFIX.length();
     private static final int MAX_LOG_TAG_LENGTH = 23;
 
