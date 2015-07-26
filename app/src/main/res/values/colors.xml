@@ -15,4 +15,7 @@
     <color name="drawer_item_selected_background">#feee</color>
     <color name="drawer_item_tint_color">#ff333333</color>
 
+    <color name="black_overlay">#66000000</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+
 </resources>

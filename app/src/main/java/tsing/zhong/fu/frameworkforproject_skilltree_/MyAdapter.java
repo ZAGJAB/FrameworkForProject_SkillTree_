@@ -1,5 +1,6 @@
 package tsing.zhong.fu.frameworkforproject_skilltree_;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,6 +47,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         });
         viewHolder.text.setText(data.get(i));
         int rd = new Random().nextInt(6);
+
         switch (rd){
             case 0:
                 viewHolder.content.setBackgroundResource(R.drawable.card00);break;
@@ -64,6 +66,26 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             default:
                 viewHolder.content.setBackgroundResource(R.drawable.card00);break;
         }
+        /*
+        switch (rd){
+            case 0:
+                viewHolder.content.setBackgroundColor(Color.rgb(0xB7, 0x1C, 0x1C));break;
+            case 1:
+                viewHolder.content.setBackgroundColor(Color.rgb(0x88, 0x0E, 0x4F));break;
+            case 2:
+                viewHolder.content.setBackgroundColor(Color.rgb(0x4A, 0x14, 0x8C));break;
+            case 3:
+                viewHolder.content.setBackgroundColor(Color.rgb(0x31, 0x1B, 0x92));break;
+            case 4:
+                viewHolder.content.setBackgroundColor(Color.rgb(0x1A, 0x23, 0x7E));break;
+            case 5:
+                viewHolder.content.setBackgroundColor(Color.rgb(0x00, 0x4D, 0x40));break;
+            case 6:
+                viewHolder.content.setBackgroundColor(Color.rgb(0x42, 0x42, 0x42));break;
+            default:
+                viewHolder.content.setBackgroundColor(Color.rgb(0x37, 0x47, 0x4F));break;
+        }
+        */
     }
 
     @Override

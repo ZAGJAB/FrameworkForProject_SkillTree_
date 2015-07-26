@@ -8,6 +8,7 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.R;
 
 /**
  * Created by fuzho on 2015/7/23.
+ * 测试List的activity
  */
 public class ListActivity extends ActionBarActivity {
 
@@ -23,7 +24,7 @@ public class ListActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.login, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 

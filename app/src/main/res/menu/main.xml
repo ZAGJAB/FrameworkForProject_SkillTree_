@@ -23,13 +23,13 @@
             android:title=""
 
            app:showAsAction="always"/>
-    <item android:title="添加测试"
-        android:id="@+id/action_add"
+    <item android:title="登陆"
+        android:id="@+id/action_login"
         >
 
     </item>
-    <item android:title="移除测试"
-        android:id="@+id/action_remove"
+    <item android:title="关于"
+        android:id="@+id/action_about"
         >
     </item>
 </menu>

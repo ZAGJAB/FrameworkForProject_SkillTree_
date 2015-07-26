@@ -43,6 +43,7 @@ public class DrawerMenuContents {
         activities[1] = ListActivity.class;
         items.add(populateDrawerItem("列表测试",
                 R.drawable.ic_star_rate_black_18dp));
+
     }
 
     public List<Map<String, ?>> getItems() {

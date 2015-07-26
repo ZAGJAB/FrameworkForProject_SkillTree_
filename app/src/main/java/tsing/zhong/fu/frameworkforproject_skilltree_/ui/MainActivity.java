@@ -1,15 +1,22 @@
 package tsing.zhong.fu.frameworkforproject_skilltree_.ui;
 
 import android.app.Application;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Handler;
 
 import com.melnykov.fab.FloatingActionButton;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +28,8 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.R;
 
 /**
  * Created by fuzho on 2015/7/23.
+ *
+ * 程序入口
  */
 public class MainActivity extends ActionBarActivity {
 
@@ -59,17 +68,18 @@ public class MainActivity extends ActionBarActivity {
 
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
 
+        swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimaryDark);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 6000);
-            }
-        }
+                                                    @Override
+                                                    public void onRefresh() {
+                                                        new Handler().postDelayed(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                swipeRefreshLayout.setRefreshing(false);
+                                                            }
+                                                        }, 6000);
+                                                    }
+                                                }
         );
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -80,7 +90,32 @@ public class MainActivity extends ActionBarActivity {
                 sendMessage("Floating Action Button: Clicked!");
             }
         });
+
+
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_about:
+                startActivity(new Intent(MainActivity.this,AboutActivity.class));
+                break;
+            case R.id.action_login:
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                break;
+            default:
+                super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
     void sendMessage(String str) {
         Toast.makeText(MainActivity.this,str,Toast.LENGTH_LONG).show();
     }

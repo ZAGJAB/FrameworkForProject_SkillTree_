@@ -8,6 +8,8 @@
     <string name="test_name">付忠庆</string>
     <string name="sig">写一些个性签名什么的 (雾</string>
     <string name="chinesetest">中文测试</string>
+    <string name="singletest">单页面测试</string>
+
     <string name="cast_application_id">CC1AD845</string>
     <string name="home_title">Home</string>
     <string name="related_content_header">You may also like</string>
@@ -22,4 +24,11 @@
     <string name="no_search_results">No search results.</string>
     <string name="loading">Loading…</string>
     <string name="media_route_menu_title">Play on…</string>
+
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>

@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.Loger;
@@ -44,6 +46,9 @@ public abstract class ActionBarActivity extends AppCompatActivity {
     private static final int DELAY_MILLIS = 1000;
 
 
+    TextView    settingTextView;
+    TextView    logoutTextView;
+    TextView    aboutTextView;
     private MenuItem mMediaRouteMenuItem;
     //顶部Bar
     private Toolbar mToolbar;
@@ -54,6 +59,7 @@ public abstract class ActionBarActivity extends AppCompatActivity {
     //侧栏列表
     private ListView mDrawerList;
     //侧栏事件
+
     private DrawerMenuContents mDrawerMenuContents;
 
     private boolean mToolbarInitialized;
@@ -149,7 +155,7 @@ public abstract class ActionBarActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.main, menu);
+        //getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -169,7 +175,7 @@ public abstract class ActionBarActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // 如果菜单打开 那么返回键是收回菜单
-        if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(Gravity.START)) {
+        if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawers();
             return;
         }
@@ -209,6 +215,31 @@ public abstract class ActionBarActivity extends AppCompatActivity {
                 throw new IllegalStateException("XML里必须包含一个drawer_List");
             }
 
+            //添加事件
+
+            settingTextView = (TextView) findViewById(R.id.drawlist_setting);
+            settingTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+                }
+            });
+
+            aboutTextView = (TextView) findViewById(R.id.drawlist_about);
+            aboutTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(),AboutActivity.class));
+                }
+            });
+
+            logoutTextView = (TextView) findViewById(R.id.drawlist_logout);
+            logoutTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                }
+            });
             // 加一个汉堡包图标
             mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 mToolbar, R.string.open_content_drawer, R.string.close_content_drawer);
@@ -219,6 +250,7 @@ public abstract class ActionBarActivity extends AppCompatActivity {
             setSupportActionBar(mToolbar);
             updateDrawerToggle();
         } else {
+
             setSupportActionBar(mToolbar);
         }
 

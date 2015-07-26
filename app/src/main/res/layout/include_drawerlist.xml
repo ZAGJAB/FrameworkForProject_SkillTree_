@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginBottom="30dp"
                 android:textSize="18sp"
                 android:text="@string/test_name"
@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginBottom="10dp"
                 android:textSize="12sp"
                 android:text="@string/sig"
@@ -82,8 +82,56 @@
             android:id="@+id/drawer_list"
             android:layout_below="@id/drawer_header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:listSelector="?android:selectableItemBackground"
             android:drawSelectorOnTop="true"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+        <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="2px"
+                android:paddingBottom="8dp"
+                android:background="@android:color/darker_gray"  />
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/drawlist_logout"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="注销"/>
+        </com.balysv.materialripple.MaterialRippleLayout>
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/drawlist_setting"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="设置"/>
+        </com.balysv.materialripple.MaterialRippleLayout>
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/drawlist_about"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="关于我们"/>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        </LinearLayout>
     </LinearLayout>
     </tsing.zhong.fu.frameworkforproject_skilltree_.ui.ScrimInsetsRelativeLayout>
