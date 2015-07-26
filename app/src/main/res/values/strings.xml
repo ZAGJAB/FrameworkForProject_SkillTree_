@@ -9,6 +9,10 @@
     <string name="sig">写一些个性签名什么的 (雾</string>
     <string name="chinesetest">中文测试</string>
     <string name="singletest">单页面测试</string>
+    <string name="input_commit">评论</string>
+    <string name="input_commit_hint">请输入评论</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
 
     <string name="cast_application_id">CC1AD845</string>
     <string name="home_title">Home</string>

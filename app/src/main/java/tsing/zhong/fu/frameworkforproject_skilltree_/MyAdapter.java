@@ -1,16 +1,21 @@
 package tsing.zhong.fu.frameworkforproject_skilltree_;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.List;
 import java.util.Random;
@@ -41,8 +46,29 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("fzq", "clicked!!");
-                Toast.makeText(MyApplication.mainActivity,"clicked!!",Toast.LENGTH_LONG).show();
+
+                new MaterialDialog
+                        .Builder(MyApplication.mainActivity)
+                        .title(R.string.input_commit)
+                        .inputMaxLength(140, R.color.material_blue_500)
+                        .input("请输入评论", null, new MaterialDialog.InputCallback() {
+
+                            @Override
+                            public void onInput(MaterialDialog materialDialog, CharSequence charSequence) {
+                                Toast.makeText(MyApplication.mainActivity,charSequence,Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .negativeText("取消")
+                        .positiveText("评论")
+                        .cancelable(true)
+                        .cancelListener(new DialogInterface.OnCancelListener() {
+                            @Override
+                            public void onCancel(DialogInterface dialog) {
+                                Toast.makeText(MyApplication.mainActivity,"canceled!",Toast.LENGTH_LONG).show();
+
+                            }
+                        })
+                        .show();
             }
         });
         viewHolder.text.setText(data.get(i));
