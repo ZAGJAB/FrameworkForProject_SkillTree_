@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Random;
 
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.MainActivity;
+import tsing.zhong.fu.frameworkforproject_skilltree_.utils.DialogHelper;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.Loger;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -46,29 +47,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                new MaterialDialog
-                        .Builder(MyApplication.mainActivity)
-                        .title(R.string.input_commit)
-                        .inputMaxLength(140, R.color.material_blue_500)
-                        .input("请输入评论", null, new MaterialDialog.InputCallback() {
-
-                            @Override
-                            public void onInput(MaterialDialog materialDialog, CharSequence charSequence) {
-                                Toast.makeText(MyApplication.mainActivity,charSequence,Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .negativeText("取消")
-                        .positiveText("评论")
-                        .cancelable(true)
-                        .cancelListener(new DialogInterface.OnCancelListener() {
-                            @Override
-                            public void onCancel(DialogInterface dialog) {
-                                Toast.makeText(MyApplication.mainActivity,"canceled!",Toast.LENGTH_LONG).show();
-
-                            }
-                        })
-                        .show();
+                DialogHelper.commit(MyApplication.mainActivity,null,null).show();
             }
         });
         viewHolder.text.setText(data.get(i));

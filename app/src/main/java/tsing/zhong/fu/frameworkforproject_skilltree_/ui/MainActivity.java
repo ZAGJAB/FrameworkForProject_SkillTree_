@@ -24,6 +24,7 @@ import java.util.List;
 import tsing.zhong.fu.frameworkforproject_skilltree_.MyAdapter;
 import tsing.zhong.fu.frameworkforproject_skilltree_.MyApplication;
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
+import tsing.zhong.fu.frameworkforproject_skilltree_.utils.DialogHelper;
 
 
 /**
@@ -108,7 +109,8 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(new Intent(MainActivity.this,AboutActivity.class));
                 break;
             case R.id.action_login:
-                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                //startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                DialogHelper.login(this,null).show();
                 break;
             default:
                 super.onOptionsItemSelected(item);
