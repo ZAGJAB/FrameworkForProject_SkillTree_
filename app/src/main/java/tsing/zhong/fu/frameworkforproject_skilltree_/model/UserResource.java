@@ -20,12 +20,6 @@ public class UserResource extends UserResourceImpl {
     public int Login(String uName, String pwd) {
         return 0;
     }
-
-    @Override
-    public User.Detail getDetail(String Uid) {
-        return null;
-    }
-
     @Override
     public List<String> getBookmarks(String Uid) {
         return null;

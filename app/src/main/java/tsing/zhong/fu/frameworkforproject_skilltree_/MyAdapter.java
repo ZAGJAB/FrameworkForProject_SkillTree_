@@ -20,6 +20,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.List;
 import java.util.Random;
 
+import tsing.zhong.fu.frameworkforproject_skilltree_.model.Courses;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.MainActivity;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.DialogHelper;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.Loger;
@@ -43,15 +44,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
 
-
+        Courses c = new Courses(data.get(i));
         viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogHelper.commit(MyApplication.mainActivity,null,null).show();
             }
         });
-        viewHolder.text.setText(data.get(i));
-        int rd = new Random().nextInt(6);
+        viewHolder.text.setText(c.getTitle());
+        int rd = Integer.parseInt(c.getPicName());
 
         switch (rd){
             case 0:

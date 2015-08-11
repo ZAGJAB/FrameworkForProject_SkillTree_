@@ -47,6 +47,18 @@
             android:name=".ui.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity android:name=".ui.Friends">
+
+        </activity>
+        <activity android:name=".ui.Hot">
+
+        </activity>
+        <activity android:name=".ui.About">
+
+        </activity>
+        <activity android:name=".ui.Message">
+
+        </activity>
     </application>
 
 </manifest>

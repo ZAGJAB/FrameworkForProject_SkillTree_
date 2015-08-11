@@ -18,4 +18,13 @@
         android:layout_gravity="center_horizontal"
         android:hint="请输入密码"
         android:inputType="textPassword"/>
+
+    <CheckBox
+        android:id="@+id/mini_login_rem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|center"
+        android:text="保持登陆状态"
+        android:layout_gravity="center_horizontal" />
+
 </LinearLayout>

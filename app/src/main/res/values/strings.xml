@@ -13,6 +13,10 @@
     <string name="input_commit_hint">请输入评论</string>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
+    <string name="empty"> </string>
+    <string name="warning_login">请先登录</string>
+    <string name="main_activity_login">为了更好的使用本软件,请您先登录</string>
+    <string name="main_activity_add">课程空空如也,请点击加号按钮添加</string>
 
     <string name="cast_application_id">CC1AD845</string>
     <string name="home_title">Home</string>

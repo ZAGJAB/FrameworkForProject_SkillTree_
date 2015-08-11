@@ -37,13 +37,6 @@ abstract class UserResourceImpl {
     public abstract int     Login(String uName, String pwd);
 
     /**
-     * Detail 结构见 {@link User}
-     * @param Uid
-     * @return {@link tsing.zhong.fu.frameworkforproject_skilltree_.model.User.Detail}
-     */
-    public abstract User.Detail getDetail(String Uid);
-
-    /**
      * 获取收藏
      * @param Uid
      * @return

@@ -9,38 +9,28 @@ package tsing.zhong.fu.frameworkforproject_skilltree_.model;
  */
 
 import android.content.Context;
-
 import java.util.*;
+
 public class Courses {
     String title;
     String picName;
     String id;
-    public Courses(String title, String id, String picName) {
-        this.title = title;
-        this.picName = picName;
+    public Courses(String id) {
+        //todo 根据id同步网络数据
+        title = "id 为" + id + "的课程";
         this.id = id;
-    }
-    public Courses(String title, String id) {
-        this.title = title;
-        this.picName = picName;
-        this.id = "sys" + (new Random(5).nextInt());
+        picName = new Random().nextInt(7) + "";
     }
 
-    public String getTitle(){
-        return this.title;
+    public String getTitle() {
+        return title;
     }
 
-    public int getImageResourceId( Context context )
-    {
-        try
-        {
-            return context.getResources().getIdentifier(this.picName, "drawable", context.getPackageName());
+    public String getId() {
+        return id;
+    }
 
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return -1;
-        }
+    public String getPicName() {
+        return picName;
     }
 }

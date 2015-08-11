@@ -2,6 +2,7 @@ package tsing.zhong.fu.frameworkforproject_skilltree_;
 
 import android.app.Application;
 
+import tsing.zhong.fu.frameworkforproject_skilltree_.model.User;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.MainActivity;
 
 
@@ -14,12 +15,11 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.ui.MainActivity;
 public class MyApplication extends Application {
 
     public static MainActivity mainActivity;
+    public static User u = User.getInstance();
     @Override
     public void onCreate() {
         super.onCreate();
-        
     }
-
     public void setMainActivity(MainActivity m) {
         mainActivity = m;
     }

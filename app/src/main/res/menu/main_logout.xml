@@ -15,10 +15,6 @@
   limitations under the License.
   -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
-    <item
-        app:showAsAction="always"
-        android:title="登录"
-        android:id="@+id/action_login">
-    </item>
+    >
+
 </menu>

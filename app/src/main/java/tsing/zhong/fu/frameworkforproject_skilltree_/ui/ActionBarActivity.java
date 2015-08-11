@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +24,11 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
+
+import tsing.zhong.fu.frameworkforproject_skilltree_.MyApplication;
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
+import tsing.zhong.fu.frameworkforproject_skilltree_.model.User;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.Loger;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.ResourceHelper;
 
@@ -45,11 +50,15 @@ public abstract class ActionBarActivity extends AppCompatActivity {
 
     private static final int DELAY_MILLIS = 1000;
 
+    User             u;
+    MyApplication    app;
+    TextView         settingTextView;
+    TextView         logoutTextView;
+    TextView         aboutTextView;
+    TextView         username;
+    TextView         usersig;
+    RoundedImageView headpic;
 
-    TextView    settingTextView;
-    TextView    logoutTextView;
-    TextView    aboutTextView;
-    private MenuItem mMediaRouteMenuItem;
     //顶部Bar
     private Toolbar mToolbar;
     //汉堡包菜单图标
@@ -109,14 +118,14 @@ public abstract class ActionBarActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Loger.d(TAG, "a Activity onCreate");
-
-
+        app = (MyApplication) getApplication();
+        u = app.u;
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        Log.e("fzq", "onstart");
         //添加是否调用的劫持判断
         if (!mToolbarInitialized) {
             throw new IllegalStateException("请在onCreate方法中调用initializeToolbar()");
@@ -216,6 +225,11 @@ public abstract class ActionBarActivity extends AppCompatActivity {
             }
 
             //添加事件
+            username = (TextView) findViewById(R.id.user_name);
+            usersig  = (TextView) findViewById(R.id.user_sig);
+            headpic  = (RoundedImageView) findViewById(R.id.headpic);
+            final MyApplication app = (MyApplication)getApplication();
+
 
             settingTextView = (TextView) findViewById(R.id.drawlist_setting);
             settingTextView.setOnClickListener(new View.OnClickListener() {
@@ -237,9 +251,12 @@ public abstract class ActionBarActivity extends AppCompatActivity {
             logoutTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                    //startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                    app.u.Logout();
+                    f_refresh();
                 }
             });
+
             // 加一个汉堡包图标
             mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 mToolbar, R.string.open_content_drawer, R.string.close_content_drawer);
@@ -279,15 +296,15 @@ public abstract class ActionBarActivity extends AppCompatActivity {
         };
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               if (position != selectedPosition) {
-                   view.setBackgroundColor(getResources().getColor(
-                       R.color.drawer_item_selected_background));
-                   mItemToOpenWhenDrawerCloses = position;
-               }
-               mDrawerLayout.closeDrawers();
-           }
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position != selectedPosition) {
+                    view.setBackgroundColor(getResources().getColor(
+                            R.color.drawer_item_selected_background));
+                    mItemToOpenWhenDrawerCloses = position;
+                }
+                mDrawerLayout.closeDrawers();
+            }
         });
         mDrawerList.setAdapter(adapter);
     }
@@ -307,7 +324,24 @@ public abstract class ActionBarActivity extends AppCompatActivity {
             mDrawerToggle.syncState();
         }
     }
-
+    void f_refresh() {
+        Intent ref = getIntent();
+        ref.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        startActivity(ref);
+        overridePendingTransition(0, 0);
+    };
+    void refresh() {
+        if (u.isOnline()){
+            logoutTextView.setEnabled(true);
+            username.setText(u.getName());
+            usersig.setText(u.getSig());
+        } else {
+            logoutTextView.setEnabled(false);
+            username.setText(R.string.warning_login);
+            usersig.setText(R.string.sig);
+        }
+    }
     /**
      * Shows the Cast First Time User experience to the user (an overlay that explains what is
      * the Cast icon)

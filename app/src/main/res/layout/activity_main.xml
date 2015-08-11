@@ -17,8 +17,18 @@
             android:id="@+id/toolbar"/>
         <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/main_framelayout">
 
+            <TextView
+                android:id="@+id/main_warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/main_activity_add"
+                android:drawableTop="@drawable/ic_info_outline_grey600_48dp"/>
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/swipeRefreshLayout"
                 android:layout_width="match_parent"

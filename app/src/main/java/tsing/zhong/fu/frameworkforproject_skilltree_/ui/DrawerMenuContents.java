@@ -33,15 +33,27 @@ public class DrawerMenuContents {
     private final Class[] activities;
 
     public DrawerMenuContents(Context ctx) {
-        activities = new Class[2];
-        items = new ArrayList<>(2);
+        activities = new Class[5];
+        items = new ArrayList<>(5);
 
         activities[0] = MainActivity.class;
         items.add(populateDrawerItem("课程进度",
                 R.drawable.ic_list_black_48dp));
 
-        activities[1] = ListActivity.class;
-        items.add(populateDrawerItem("列表测试",
+        activities[1] = Friends.class;
+        items.add(populateDrawerItem("朋友圈",
+                R.drawable.ic_star_rate_black_18dp));
+
+        activities[2] = Hot.class;
+        items.add(populateDrawerItem("热门课程",
+                R.drawable.ic_star_rate_black_18dp));
+
+        activities[3] = About.class;
+        items.add(populateDrawerItem("我的信息",
+                R.drawable.ic_star_rate_black_18dp));
+
+        activities[4] = Message.class;
+        items.add(populateDrawerItem("消息",
                 R.drawable.ic_star_rate_black_18dp));
 
     }
