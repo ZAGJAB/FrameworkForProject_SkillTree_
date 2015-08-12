@@ -11,11 +11,12 @@
     <color name="fab_primary">#3F51B5</color>
     <color name="fab_primary_pressed">#3F51B5</color>
     <color name="fab_ripple">#ccc</color>
-
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#3F51B5</color>
     <color name="drawer_item_selected_background">#feee</color>
     <color name="drawer_item_tint_color">#ff333333</color>
 
     <color name="black_overlay">#66000000</color>
-    <color name="colorPrimaryDark">#303F9F</color>
 
 </resources>

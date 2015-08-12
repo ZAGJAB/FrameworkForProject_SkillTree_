@@ -66,7 +66,9 @@ public class MainActivity extends ActionBarActivity {
             mRecyclerView.setHasFixedSize(true);
             layoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(layoutManager);
-            mRecyclerView.setAdapter(new MyAdapter(app.u.getCourseIdSet()));
+            MyAdapter adapter = new MyAdapter(app.u.getCourseIdSet());
+            adapter.setOnClickListener(this.onClickListener);
+            mRecyclerView.setAdapter(adapter);
 
 
             swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
@@ -166,4 +168,11 @@ public class MainActivity extends ActionBarActivity {
         }
        if (swipeRefreshLayout!=null) swipeRefreshLayout.setRefreshing(false);
     }
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(MainActivity.this,
+                    FlexibleSpaceWithImageWithViewPagerTab2Activity.class));
+        }
+    };
 }

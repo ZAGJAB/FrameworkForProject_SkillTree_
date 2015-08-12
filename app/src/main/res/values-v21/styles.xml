@@ -7,12 +7,12 @@
                 <item name="android:windowContentTransitions">true</item>
 
                 <item name="colorPrimary">#3F51B5</item>
-                <item name="colorPrimaryDark">#303F9F</item>
+                <item name="colorPrimaryDark">#3F51B5</item>
                 <item name="colorAccent">#009688</item>
         </style>
         <style name="MDThemeActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
                 <item name="colorPrimary">#3F51B5</item>
-                <item name="colorPrimaryDark">#303F9F</item>
+                <item name="colorPrimaryDark">#3F51B5</item>
                 <item name="colorAccent">#3F51B5</item>
         </style>
 </resources>

@@ -47,7 +47,8 @@
             android:name=".ui.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
-        <activity android:name=".ui.Friends">
+        <activity android:name=".ui.Friends"
+            android:label="朋友圈">
 
         </activity>
         <activity android:name=".ui.Hot">
@@ -66,6 +67,12 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
+        </activity>
+        <activity android:name=".ui.FlexibleSpaceWithImageRecyclerViewActivity">
+
+        </activity>
+        <activity android:name=".ui.FlexibleSpaceWithImageWithViewPagerTab2Activity">
+
         </activity>
     </application>
 

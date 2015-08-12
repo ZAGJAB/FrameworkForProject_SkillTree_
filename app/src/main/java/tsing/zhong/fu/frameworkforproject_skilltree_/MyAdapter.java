@@ -32,6 +32,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         this.data = data;
     }
 
+    private View.OnClickListener onClickListener = null;
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         // 加载Item的布局.布局中用到的真正的CardView.
@@ -53,7 +57,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         });
         viewHolder.text.setText(c.getTitle());
         int rd = Integer.parseInt(c.getPicName());
-
+        viewHolder.main.setOnClickListener(this.onClickListener);
         switch (rd){
             case 0:
                 viewHolder.content.setBackgroundResource(R.drawable.card00);break;
