@@ -88,7 +88,8 @@ public class MainActivity extends ActionBarActivity {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    frameLayout.removeView(waring);
+                    Intent intent = new Intent(MainActivity.this,Add.class);
+                    startActivity(intent);
                 }
             });
             refresh();

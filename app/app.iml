@@ -98,6 +98,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
+    <orderEntry type="library" exported="" name="androrm" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-22.2.1" level="project" />
     <orderEntry type="library" exported="" name="roundedimageview-2.1.1" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.2.1" level="project" />

@@ -59,6 +59,14 @@
         <activity android:name=".ui.Message">
 
         </activity>
+        <activity android:name=".ui.Add"
+            android:theme="@style/MDThemeActionBar"
+            android:parentActivityName=".ui.MainActivity"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
