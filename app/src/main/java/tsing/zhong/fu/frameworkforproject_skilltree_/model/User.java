@@ -14,6 +14,7 @@ import java.util.ListIterator;
  *
  * 用户的model
  * 本地数据库只记录是否已经登陆
+ *
  */
 public class User {
 
