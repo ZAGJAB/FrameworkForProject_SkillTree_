@@ -4,10 +4,6 @@
 
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--
- To retrieve OAuth 2.0 tokens or invalidate tokens to disconnect a user. This disconnect
-     option is required to comply with the Google+ Sign-In developer policies
-    -->
     <uses-permission android:name="android.permission.USE_CREDENTIALS" /> <!-- To retrieve the account name (email) as part of sign-in: -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -17,14 +13,12 @@
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="未命名"
         android:theme="@style/MDTheme" >
         <activity
-            android:name=".ui.MainActivity"
-            android:label="@string/activity_main" >
+            android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -43,7 +37,7 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:theme="@style/MDThemeActionBar"
             android:name=".ui.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
@@ -57,21 +51,19 @@
         <activity android:name=".ui.About">
 
         </activity>
-        <activity android:name=".ui.Message">
+        <activity android:name=".ui.Message"
+            android:label="消息">
 
         </activity>
         <activity android:name=".ui.Add"
-            android:theme="@style/MDThemeActionBar"
+            android:theme="@style/MDTheme"
             android:parentActivityName=".ui.MainActivity"
             android:label="">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
         </activity>
-        <activity android:name=".ui.FlexibleSpaceWithImageRecyclerViewActivity">
-
-        </activity>
-        <activity android:name=".ui.FlexibleSpaceWithImageWithViewPagerTab2Activity">
+        <activity android:name=".ui.FlexibleSpaceWithImageWithViewPagerTabActivity">
 
         </activity>
     </application>

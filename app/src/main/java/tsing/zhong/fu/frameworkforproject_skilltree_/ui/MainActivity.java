@@ -25,6 +25,7 @@ import com.melnykov.fab.FloatingActionButton;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,7 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.MyApplication;
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
 import tsing.zhong.fu.frameworkforproject_skilltree_.model.User;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.DialogHelper;
+import tsing.zhong.fu.frameworkforproject_skilltree_.utils.NetUtil;
 
 
 /**
@@ -52,7 +54,6 @@ public class MainActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app.setMainActivity(this);
-
         setContentView(R.layout.activity_main);
         initializeToolbar();
         if (!u.isOnline()) {
@@ -144,12 +145,16 @@ public class MainActivity extends ActionBarActivity {
                 user = (EditText) v.findViewById(R.id.mini_login_user);
                 pwd  = (EditText) v.findViewById(R.id.mini_login_pwd);
             }
-            if (app.u.Login(user.getText().toString(),pwd.getText().toString())==0) {
-                sendMessage("登陆成功");
-                swipeRefreshLayout.setRefreshing(true);
-                f_refresh();
-            } else {
-                sendMessage("账号密码错误");
+            try {
+                if (app.u.Login(user.getText().toString(),pwd.getText().toString())==0) {
+                    sendMessage("登陆成功");
+                    swipeRefreshLayout.setRefreshing(true);
+                    f_refresh();
+                } else {
+                    sendMessage("账号密码错误");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     };
@@ -172,7 +177,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onClick(View v) {
             startActivity(new Intent(MainActivity.this,
-                    FlexibleSpaceWithImageWithViewPagerTab2Activity.class));
+                    FlexibleSpaceWithImageWithViewPagerTabActivity.class));
         }
     };
 }

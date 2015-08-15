@@ -1,22 +1,6 @@
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" android:gravity="center_horizontal"
-        android:orientation="vertical"
-        tools:context="tsing.zhong.fu.frameworkforproject_skilltree_.ui.LoginActivity">
-
-
-        <SearchView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/searchView"
-            android:layout_gravity="center_horizontal" />
-    </LinearLayout>
-</android.support.v4.widget.DrawerLayout>
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+</LinearLayout>

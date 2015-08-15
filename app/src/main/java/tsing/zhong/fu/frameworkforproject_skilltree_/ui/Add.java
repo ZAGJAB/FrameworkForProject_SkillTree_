@@ -10,6 +10,7 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
 
@@ -18,7 +19,7 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.R;
  * Created by fuzho on 2015/8/11.
  *
  */
-public class Add extends AppCompatActivity {
+public class Add extends AppCompatActivity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -40,4 +41,6 @@ public class Add extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

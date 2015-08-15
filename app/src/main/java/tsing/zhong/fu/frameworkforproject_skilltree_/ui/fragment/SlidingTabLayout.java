@@ -41,7 +41,7 @@ import android.widget.TextView;
  * <p>
  * The colors can be customized in two ways. The first and simplest is to provide an array of colors
  * via {@link #setSelectedIndicatorColors(int...)}. The
- * alternative is via the {@link com.google.samples.apps.iosched.ui.widget.SlidingTabLayout.TabColorizer} interface which provides you complete control over
+ * alternative is via the {@link  tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.SlidingTabLayout.TabColorizer} interface which provides you complete control over
  * which color is used for any individual position.
  * <p>
  * The views used as tabs can be customized by calling {@link #setCustomTabView(int, int)},
@@ -50,7 +50,7 @@ import android.widget.TextView;
 public class SlidingTabLayout extends HorizontalScrollView {
     /**
      * Allows complete control over the colors drawn in the tab layout. Set with
-     * {@link #setCustomTabColorizer(com.google.samples.apps.iosched.ui.widget.SlidingTabLayout.TabColorizer)}.
+     * {@link #setCustomTabColorizer( tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.SlidingTabLayout.TabColorizer)}.
      */
     public interface TabColorizer {
 
@@ -100,7 +100,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
 
     /**
-     * Set the custom {@link com.google.samples.apps.iosched.ui.widget.SlidingTabLayout.TabColorizer} to be used.
+     * Set the custom {@link  tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.SlidingTabLayout.TabColorizer} to be used.
      *
      * If you only require simple custmisation then you can use
      * {@link #setSelectedIndicatorColors(int...)} to achieve
@@ -123,7 +123,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
 
     /**
-     * Set the {@link android.support.v4.view.ViewPager.OnPageChangeListener}. When using {@link com.google.samples.apps.iosched.ui.widget.SlidingTabLayout} you are
+     * Set the {@link android.support.v4.view.ViewPager.OnPageChangeListener}. When using {@link  tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.SlidingTabLayout} you are
      * required to set any {@link android.support.v4.view.ViewPager.OnPageChangeListener} through this method. This is so
      * that the layout can update it's scroll position correctly.
      *
