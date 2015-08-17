@@ -54,6 +54,7 @@ public class Friends extends ActionBarActivity implements MaterialTabListener {
             );
 
         }
+        refresh();
     }
 
     @Override

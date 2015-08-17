@@ -1,25 +1,19 @@
 package tsing.zhong.fu.frameworkforproject_skilltree_.model;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
-import org.apache.http.HttpConnection;
-import org.json.JSONException;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+
+import tsing.zhong.fu.frameworkforproject_skilltree_.ui.MainActivity;
+import tsing.zhong.fu.frameworkforproject_skilltree_.utils.NetUtil;
 
 /**
  * Created by fuzho on 2015/7/23.
@@ -56,21 +50,16 @@ public class User {
         courseIdSet = new ArrayList<>();
     };
 
-    public int Login(String u,String p) throws IOException {
-        /*************demo***********/
-
-        /**************************/
-        if (u.equals("fzq")&&p.equals("zzz")) {
-            //同步到数据库
-            Uname = "付忠庆";
-            Sig   ="呵呵呵呵";
-            online = true;
-            courseIdSet.add("0001");
-            courseIdSet.add("0003");
-            return 0;
-        }
-        return -1;
-    };
+    public void Login(String u,String p,JsonHttpResponseHandler handler) throws IOException {
+        NetUtil.get("?c=api&_table=user&_interface=list&user_name="+u+"&user_password="+p,null,handler);
+    }
+    public void setDetail(String id) {
+        online = true;
+        /*temp*/
+        Uname = id;
+        Sig   = "im "+id;
+        /******/
+    }
     public void Logout() {
         online = false;
         courseIdSet.clear();
@@ -89,4 +78,5 @@ public class User {
     public List<String> getCourseIdSet() {
         return courseIdSet;
     }
+
 }

@@ -18,6 +18,7 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.ui.ActionBarActivity;
 /**
  * Created by fuzho on 2015/7/28.
  * Material 弹出框
+ *
  */
 public class DialogHelper {
     static public MaterialDialog.Builder commit(Context context,
@@ -41,7 +42,7 @@ public class DialogHelper {
                   .Builder(context)
                   .title(R.string.title_activity_login)
                   .customView(R.layout.mini_login, true)
-                  .negativeText("取消")
+                  .negativeText("注册")
                   .positiveText("登陆")
                   .cancelable(true)
                   .callback(callback);
@@ -49,10 +50,11 @@ public class DialogHelper {
     static public MaterialDialog.Builder process(Context context) {
         return new MaterialDialog
                 .Builder(context)
-                .title("登陆中,请等待...")
-                .progress(true, 0)
-                .progressIndeterminateStyle(true)
-                .autoDismiss(false);
+                .title("登陆")
+                .content("登陆中,请等待...")
+                .progress(true,0)
+                //.autoDismiss(false)
+                .cancelable(false);
     }
     /**
      * example area

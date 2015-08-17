@@ -21,8 +21,13 @@ import android.widget.Toast;
 import android.os.Handler;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.melnykov.fab.FloatingActionButton;
 
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
@@ -50,16 +55,13 @@ public class MainActivity extends ActionBarActivity {
     FloatingActionButton    fab;
     TextView                waring;
     FrameLayout             frameLayout;
+    MaterialDialog.Builder  processBuilder;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app.setMainActivity(this);
         setContentView(R.layout.activity_main);
         initializeToolbar();
-        if (!u.isOnline()) {
-            TextView t = (TextView) findViewById(R.id.main_warning);
-            t.setText(R.string.main_activity_login);
-        }
 
             frameLayout = (FrameLayout) findViewById(R.id.main_framelayout);
             waring = (TextView) findViewById(R.id.main_warning);
@@ -131,12 +133,16 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
-    void sendMessage(String str) {
+    void sendToastMessage(String str) {
         Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG).show();
     }
     MaterialDialog.ButtonCallback myCallback = new MaterialDialog.ButtonCallback() {
         @Override
-        public void onPositive(MaterialDialog dialog) {
+        public void onPositive(final MaterialDialog dialog) {
+            if (processBuilder == null) {
+                processBuilder = DialogHelper.process(MainActivity.this);
+            }
+            processBuilder.show();
             super.onPositive(dialog);
             LinearLayout v = (LinearLayout)dialog.getCustomView();
             EditText user = null;
@@ -146,16 +152,52 @@ public class MainActivity extends ActionBarActivity {
                 pwd  = (EditText) v.findViewById(R.id.mini_login_pwd);
             }
             try {
-                if (app.u.Login(user.getText().toString(),pwd.getText().toString())==0) {
-                    sendMessage("登陆成功");
-                    swipeRefreshLayout.setRefreshing(true);
-                    f_refresh();
-                } else {
-                    sendMessage("账号密码错误");
-                }
+                app.u.Login(user.getText().toString(),
+                            pwd.getText().toString(),
+                            new JsonHttpResponseHandler(){
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                    //processBuilder = null;
+                                    processBuilder.autoDismiss(true);
+                                    sendToastMessage("通信失败");
+                                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                                }
+
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                    try {
+                                        if (response.get("err_msg").equals("success")) {
+                                            if(response.get("data").equals(false)) {
+                                                sendToastMessage("账号密码不匹配");
+                                            } else {
+                                                sendToastMessage("登陆成功");
+                                                JSONArray array = (JSONArray) ((JSONObject)response.get("data")).get("items");
+                                                u.setDetail((String) array.getJSONObject(0).get("user_id"));
+                                            }
+                                            //sendToastMessage(response.toString());
+                                        } else {
+                                            if (response.get("err_msg").equals("user_name FIELD REQUIRED")) {
+                                                sendToastMessage("用户名称未填");
+                                            } else {
+                                                sendToastMessage("密码未填");
+                                            }
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    f_refresh();
+                                    //super.onSuccess(statusCode, headers, response);
+                                }
+                            });
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        @Override
+        public void onNegative(MaterialDialog dialog) {
+            super.onNegative(dialog);
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
         }
     };
 
@@ -180,4 +222,5 @@ public class MainActivity extends ActionBarActivity {
                     FlexibleSpaceWithImageWithViewPagerTabActivity.class));
         }
     };
+
 }
