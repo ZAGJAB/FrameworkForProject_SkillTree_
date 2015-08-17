@@ -151,6 +151,7 @@ public class MainActivity extends ActionBarActivity {
                 user = (EditText) v.findViewById(R.id.mini_login_user);
                 pwd  = (EditText) v.findViewById(R.id.mini_login_pwd);
             }
+            final String pass = pwd.getText().toString();
             try {
                 app.u.Login(user.getText().toString(),
                             pwd.getText().toString(),
@@ -160,6 +161,7 @@ public class MainActivity extends ActionBarActivity {
                                     //processBuilder = null;
                                     processBuilder.autoDismiss(true);
                                     sendToastMessage("通信失败");
+                                    f_refresh();
                                     super.onFailure(statusCode, headers, throwable, errorResponse);
                                 }
 
@@ -172,15 +174,11 @@ public class MainActivity extends ActionBarActivity {
                                             } else {
                                                 sendToastMessage("登陆成功");
                                                 JSONArray array = (JSONArray) ((JSONObject)response.get("data")).get("items");
-                                                u.setDetail((String) array.getJSONObject(0).get("user_id"));
+                                                u.setDetail(array.getJSONObject(0),pass);
                                             }
                                             //sendToastMessage(response.toString());
                                         } else {
-                                            if (response.get("err_msg").equals("user_name FIELD REQUIRED")) {
                                                 sendToastMessage("用户名称未填");
-                                            } else {
-                                                sendToastMessage("密码未填");
-                                            }
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();

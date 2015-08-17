@@ -6,6 +6,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.MainActivity;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.NetUtil;
+import tsing.zhong.fu.frameworkforproject_skilltree_.utils.Util;
 
 /**
  * Created by fuzho on 2015/7/23.
@@ -25,7 +27,8 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.utils.NetUtil;
 public class User {
 
     private  boolean online = false;
-    private  String  Uname,Sig;
+    private  String  token;
+    private  String  Uname,Sig,id,account;
     private  List<String> courseIdSet = null;
 
     public static User rt = null;
@@ -51,15 +54,29 @@ public class User {
     };
 
     public void Login(String u,String p,JsonHttpResponseHandler handler) throws IOException {
-        NetUtil.get("?c=api&_table=user&_interface=list&user_name="+u+"&user_password="+p,null,handler);
+
+        NetUtil.get("?c=api&_table=user&_interface=list&account="+u+"&password="+ Util.md5(p),null,handler);
     }
-    public void setDetail(String id) {
+    public void setDetail(JSONObject json,String pass) {
         online = true;
-        /*temp*/
-        courseIdSet.add("0001");
-        Uname = id;
-        Sig   = "im "+id;
-        /******/
+        try {
+            account = (String) json.get("account");
+            id      = (String) json.get("uid");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        NetUtil.get("?c=api&_table=user&_interface=get_token&account="+account+"&password="+pass,null,new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    token = (String)((JSONObject)response.get("data")).get("token");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                super.onSuccess(statusCode, headers, response);
+            }
+        });
     }
     public void Logout() {
         online = false;
