@@ -2,9 +2,6 @@
 <resources>
 
         <style name="MDTheme" parent="Theme.AppCompat.Light.NoActionBar">
-                <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-                <item name="android:windowTranslucentStatus">true</item>
-                <item name="android:windowContentTransitions">true</item>
 
                 <item name="colorPrimary">#3F51B5</item>
                 <item name="colorPrimaryDark">#3F51B5</item>

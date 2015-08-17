@@ -213,6 +213,9 @@ public class MainActivity extends ActionBarActivity {
             waring.setText(R.string.main_activity_add);
             fab.show(true);
         }
+        if (u.getCourseIdSet().size() !=0) {
+            waring.setVisibility(View.INVISIBLE);
+        }
        if (swipeRefreshLayout!=null) swipeRefreshLayout.setRefreshing(false);
     }
     private View.OnClickListener onClickListener = new View.OnClickListener() {

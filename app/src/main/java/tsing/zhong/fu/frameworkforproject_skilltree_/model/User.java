@@ -56,6 +56,7 @@ public class User {
     public void setDetail(String id) {
         online = true;
         /*temp*/
+        courseIdSet.add("0001");
         Uname = id;
         Sig   = "im "+id;
         /******/
