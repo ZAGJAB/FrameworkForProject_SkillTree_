@@ -1,5 +1,8 @@
 package tsing.zhong.fu.frameworkforproject_skilltree_.model;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -14,8 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.MainActivity;
+import tsing.zhong.fu.frameworkforproject_skilltree_.ui.Message;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.NetUtil;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.Util;
+
+import static tsing.zhong.fu.frameworkforproject_skilltree_.ui.MainActivity.*;
 
 /**
  * Created by fuzho on 2015/7/23.
@@ -27,8 +33,7 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.utils.Util;
 public class User {
 
     private  boolean online = false;
-    private  String  token;
-    private  String  Uname,Sig,id,account;
+    private  String  Uname,Sig,id,account,Utoken;
     private  List<String> courseIdSet = null;
 
     public static User rt = null;
@@ -55,28 +60,7 @@ public class User {
 
     public void Login(String u,String p,JsonHttpResponseHandler handler) throws IOException {
 
-        NetUtil.get("?c=api&_table=user&_interface=list&account="+u+"&password="+ Util.md5(p),null,handler);
-    }
-    public void setDetail(JSONObject json,String pass) {
-        online = true;
-        try {
-            account = (String) json.get("account");
-            id      = (String) json.get("uid");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        NetUtil.get("?c=api&_table=user&_interface=get_token&account="+account+"&password="+pass,null,new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    token = (String)((JSONObject)response.get("data")).get("token");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                super.onSuccess(statusCode, headers, response);
-            }
-        });
+        NetUtil.get("?c=api&_table=user&_interface=list&account=" + u + "&password=" + Util.md5(p), null, handler);
     }
     public void Logout() {
         online = false;
@@ -87,14 +71,51 @@ public class User {
     public boolean isOnline() {
         return online;
     }
-    public String  getName() {
-        return Uname;
-    }
-    public String  getSig() {
-        return Sig;
-    }
     public List<String> getCourseIdSet() {
         return courseIdSet;
     }
 
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUtoken() {
+        return Utoken;
+    }
+
+    public void setUtoken(String utoken) {
+        Utoken = utoken;
+    }
+
+    public String getUname() {
+        return Uname;
+    }
+
+    public void setUname(String uname) {
+        Uname = uname;
+    }
+
+    public String getSig() {
+        return Sig;
+    }
+
+    public void setSig(String sig) {
+        Sig = sig;
+    }
+
+    public void setOnline(boolean b) {
+        online = b;
+    }
 }

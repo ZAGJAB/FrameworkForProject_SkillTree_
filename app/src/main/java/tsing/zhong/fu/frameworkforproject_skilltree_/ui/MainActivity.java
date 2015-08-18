@@ -4,7 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
+import android.os.*;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +19,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.os.Handler;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -56,6 +56,8 @@ public class MainActivity extends ActionBarActivity {
     TextView                waring;
     FrameLayout             frameLayout;
     MaterialDialog.Builder  processBuilder;
+    JSONArray               array;
+    String                  pass;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,7 +153,7 @@ public class MainActivity extends ActionBarActivity {
                 user = (EditText) v.findViewById(R.id.mini_login_user);
                 pwd  = (EditText) v.findViewById(R.id.mini_login_pwd);
             }
-            final String pass = pwd.getText().toString();
+            pass = pwd.getText().toString();
             try {
                 app.u.Login(user.getText().toString(),
                             pwd.getText().toString(),
@@ -171,10 +173,51 @@ public class MainActivity extends ActionBarActivity {
                                         if (response.get("err_msg").equals("success")) {
                                             if(response.get("data").equals(false)) {
                                                 sendToastMessage("账号密码不匹配");
+                                                f_refresh();
                                             } else {
                                                 sendToastMessage("登陆成功");
-                                                JSONArray array = (JSONArray) ((JSONObject)response.get("data")).get("items");
-                                                u.setDetail(array.getJSONObject(0),pass);
+                                                array = (JSONArray) ((JSONObject)response.get("data")).get("items");
+                                                JSONObject json = array.getJSONObject(0);
+                                                try {
+                                                    u.setAccount((String) json.get("account"));
+                                                    u.setId((String) json.get("user_id"));
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                NetUtil.get("?c=api&_table=user&_interface=get_token&account=" + u.getAccount() + "&password=" + pass, null, new JsonHttpResponseHandler() {
+                                                    @Override
+                                                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                                        try {
+                                                            JSONObject jsondataToken = (JSONObject) response.get("data");
+                                                            u.setUtoken ((String) jsondataToken.get("token"));
+                                                            NetUtil.get("?c=api&_table=user_data&_interface=list&user_id=" + u.getId() + "&token=" + u.getUtoken(), null, new JsonHttpResponseHandler() {
+                                                                @Override
+                                                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                                                    try {
+                                                                        JSONArray data = ((JSONObject) response.get("data")).getJSONArray("items");
+                                                                        System.out.println(data.toString());
+                                                                        JSONObject jdata = data.getJSONObject(0);
+                                                                        u.setUname(jdata.getString("nickname"));
+                                                                        u.setSig(jdata.getString("sig"));
+                                                                    } catch (JSONException e) {
+                                                                        e.printStackTrace();
+                                                                    }
+                                                                    Looper looper = Looper.getMainLooper();
+                                                                    Main_Handler handler = new Main_Handler(looper);
+                                                                    Message msg = handler.obtainMessage(1,1,1,"");
+                                                                    msg.getData().putString("cmd","refresh");
+                                                                    u.setOnline(true);
+                                                                    handler.sendMessage(msg);
+                                                                    super.onSuccess(statusCode, headers, response);
+                                                                }
+                                                            });
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                        super.onSuccess(statusCode, headers, response);
+                                                    }
+                                                });
+
                                             }
                                             //sendToastMessage(response.toString());
                                         } else {
@@ -183,7 +226,7 @@ public class MainActivity extends ActionBarActivity {
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
-                                    f_refresh();
+                                    //f_refresh();
                                     //super.onSuccess(statusCode, headers, response);
                                 }
                             });
@@ -223,5 +266,18 @@ public class MainActivity extends ActionBarActivity {
                     FlexibleSpaceWithImageWithViewPagerTabActivity.class));
         }
     };
+
+    class Main_Handler extends Handler {
+        public Main_Handler(Looper looper) {
+            super(looper);
+        }   
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if ("refresh".equals(msg.getData().getString("cmd"))) {
+                f_refresh();
+            }
+        }
+    }
 
 }

@@ -5,7 +5,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 public class NetUtil {
-    private static final String BASE_URL = "http://apiapiapi.sinaapp.com/";
+    private static final String BASE_URL = "https://apiapiapi.sinaapp.com/";
     private static AsyncHttpClient client = new AsyncHttpClient();
     public static void get(String url,RequestParams parmas, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), parmas,responseHandler);
