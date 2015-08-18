@@ -316,8 +316,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_LONG);
-            // TODO: register the new account here.
+            //Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_LONG).show();
+            Looper looper = Looper.getMainLooper();
+            Main_Handler handler = new Main_Handler(looper);
+            Message msg = handler.obtainMessage(1,1,1,"");
+            msg.getData().putString("cmd","toast");
+            handler.sendMessage(msg);
             return true;
         }
 
@@ -340,6 +344,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
+        }
+    }
+    class Main_Handler extends Handler {
+        public Main_Handler(Looper looper) {
+            super(looper);
+        }
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if ("toast".equals(msg.getData().getString("cmd"))) {
+                Toast.makeText(LoginActivity.this,"注册成功",Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

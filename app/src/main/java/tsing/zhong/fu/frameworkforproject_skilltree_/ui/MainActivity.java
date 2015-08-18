@@ -201,10 +201,10 @@ public class MainActivity extends ActionBarActivity {
                                                                             u.setUname(jdata.getString("nickname"));
                                                                             u.setSig(jdata.getString("sig"));
                                                                         } else {
-                                                                            System.out.print("http://apiapiapi.sinaapp.com/?c=api&_table=user_data&_interface=insert&nickname="+u.getAccount()+"&sig="+u.getSig()+"&user_id="+u.getId()+"&token="+u.getUtoken());
-                                                                            NetUtil.post("http://apiapiapi.sinaapp.com/?c=api&_table=user_data&_interface=insert&nickname="+u.getAccount()+"&sig="+u.getSig()+"&user_id="+u.getId()+"&token="+u.getUtoken(),null,new JsonHttpResponseHandler(){
-
+                                                                            NetUtil.post("http://apiapiapi.sinaapp.com/?c=api&_table=user_data&_interface=insert&nickname="+u.getAccount()+"&sig=写点什么吧!"+"&user_id="+u.getId()+"&token="+u.getUtoken(),null,new JsonHttpResponseHandler(){
                                                                             });
+                                                                            u.setUname(u.getAccount());
+                                                                            u.setSig("写点什么吧！");
                                                                         }
                                                                     } catch (JSONException e) {
                                                                         e.printStackTrace();
