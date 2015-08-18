@@ -334,8 +334,17 @@ public abstract class ActionBarActivity extends AppCompatActivity {
     void refresh() {
         if (u.isOnline()){
             logoutTextView.setEnabled(true);
-            username.setText(u.getUname());
-            usersig.setText(u.getSig());
+
+            String  t1 = u.getUname();
+            String  t2 = u.getSig();
+            //if (t1.length() == 0) {
+            //    t1 = u.getAccount();
+            //}
+            //if (t2.length() == 0) {
+            //    t2 = "写点什么吧！";
+            //}
+            username.setText(t1);
+            usersig.setText(t2);
         } else {
             logoutTextView.setEnabled(false);
             username.setText(R.string.warning_login);

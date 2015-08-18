@@ -194,11 +194,18 @@ public class MainActivity extends ActionBarActivity {
                                                                 @Override
                                                                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                                                     try {
-                                                                        JSONArray data = ((JSONObject) response.get("data")).getJSONArray("items");
-                                                                        System.out.println(data.toString());
-                                                                        JSONObject jdata = data.getJSONObject(0);
-                                                                        u.setUname(jdata.getString("nickname"));
-                                                                        u.setSig(jdata.getString("sig"));
+                                                                        if (!response.get("data").equals(false)) {
+                                                                            JSONArray data = ((JSONObject) response.get("data")).getJSONArray("items");
+                                                                            System.out.println(data.toString());
+                                                                            JSONObject jdata = data.getJSONObject(0);
+                                                                            u.setUname(jdata.getString("nickname"));
+                                                                            u.setSig(jdata.getString("sig"));
+                                                                        } else {
+                                                                            System.out.print("http://apiapiapi.sinaapp.com/?c=api&_table=user_data&_interface=insert&nickname="+u.getAccount()+"&sig="+u.getSig()+"&user_id="+u.getId()+"&token="+u.getUtoken());
+                                                                            NetUtil.post("http://apiapiapi.sinaapp.com/?c=api&_table=user_data&_interface=insert&nickname="+u.getAccount()+"&sig="+u.getSig()+"&user_id="+u.getId()+"&token="+u.getUtoken(),null,new JsonHttpResponseHandler(){
+
+                                                                            });
+                                                                        }
                                                                     } catch (JSONException e) {
                                                                         e.printStackTrace();
                                                                     }
@@ -270,7 +277,7 @@ public class MainActivity extends ActionBarActivity {
     class Main_Handler extends Handler {
         public Main_Handler(Looper looper) {
             super(looper);
-        }   
+        }
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
