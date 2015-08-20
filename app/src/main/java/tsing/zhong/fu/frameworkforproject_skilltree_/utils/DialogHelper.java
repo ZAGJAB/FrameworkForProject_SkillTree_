@@ -35,6 +35,15 @@ public class DialogHelper {
                   .cancelable(true)
                   .cancelListener(onCancelListener);
     }
+    static public MaterialDialog.Builder search(Context context, MaterialDialog.InputCallback inputCallback) {
+        return new MaterialDialog.Builder(context)
+                .title("搜索")
+                .inputMaxLength(50, R.color.material_blue_500)
+                .input(R.string.input_commit_hint, R.string.empty, inputCallback)
+                .negativeText("取消")
+                .positiveText("搜索")
+                .cancelable(true);
+    }
     static public MaterialDialog.Builder login(Context context,
                                                MaterialDialog.ButtonCallback callback) {
         if (callback == null) callback = defalutCallBack;

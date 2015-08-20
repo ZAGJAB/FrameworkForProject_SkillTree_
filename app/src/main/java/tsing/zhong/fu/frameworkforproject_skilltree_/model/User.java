@@ -118,4 +118,8 @@ public class User {
     public void setOnline(boolean b) {
         online = b;
     }
+
+    public void addCourese(String id) {
+        courseIdSet.add(id);
+    }
 }

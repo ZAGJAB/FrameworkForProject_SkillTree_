@@ -125,7 +125,6 @@ public abstract class ActionBarActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.e("fzq", "onstart");
         //添加是否调用的劫持判断
         if (!mToolbarInitialized) {
             throw new IllegalStateException("请在onCreate方法中调用initializeToolbar()");

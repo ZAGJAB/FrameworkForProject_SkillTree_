@@ -57,12 +57,9 @@
 
         </activity>
         <activity android:name=".ui.Add"
-            android:theme="@style/MDTheme"
-            android:parentActivityName=".ui.MainActivity"
-            android:label="">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.MainActivity" />
+            android:theme="@style/MDThemeActionBar"
+            android:label="添加新课程">
+
         </activity>
         <activity android:name=".ui.FlexibleSpaceWithImageWithViewPagerTabActivity">
 

@@ -58,6 +58,7 @@ public class MainActivity extends ActionBarActivity {
     MaterialDialog.Builder  processBuilder;
     JSONArray               array;
     String                  pass;
+    static int i = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,19 +78,21 @@ public class MainActivity extends ActionBarActivity {
 
 
             swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-
-            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                                                        @Override
-                                                        public void onRefresh() {
-                                                            new Handler().postDelayed(new Runnable() {
-                                                                @Override
-                                                                public void run() {
-                                                                    swipeRefreshLayout.setRefreshing(false);
-                                                                }
-                                                            }, 3000);
+            if (u.isOnline()) {
+                swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                                                            @Override
+                                                            public void onRefresh() {
+                                                                new Handler().postDelayed(new Runnable() {
+                                                                    @Override
+                                                                    public void run() {
+                                                                        swipeRefreshLayout.setRefreshing(false);
+                                                                        u.addCourese(i++ + "");
+                                                                    }
+                                                                }, 3000);
+                                                            }
                                                         }
-                                                    }
-            );
+                );
+            }
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.attachToRecyclerView(mRecyclerView);
             fab.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +204,7 @@ public class MainActivity extends ActionBarActivity {
                                                                             u.setUname(jdata.getString("nickname"));
                                                                             u.setSig(jdata.getString("sig"));
                                                                         } else {
-                                                                            NetUtil.post("http://apiapiapi.sinaapp.com/?c=api&_table=user_data&_interface=insert&nickname="+u.getAccount()+"&sig=写点什么吧!"+"&user_id="+u.getId()+"&token="+u.getUtoken(),null,new JsonHttpResponseHandler(){
+                                                                            NetUtil.post("http://apiapiapi.sinaapp.com/?c=api&_table=user_data&_interface=ins&nickname="+u.getAccount()+"&sig=写点什么吧!"+"&user_id="+u.getId()+"&token="+u.getUtoken(),null,new JsonHttpResponseHandler(){
                                                                             });
                                                                             u.setUname(u.getAccount());
                                                                             u.setSig("写点什么吧！");
@@ -229,6 +232,7 @@ public class MainActivity extends ActionBarActivity {
                                             //sendToastMessage(response.toString());
                                         } else {
                                                 sendToastMessage("用户名称未填");
+                                                f_refresh();
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
