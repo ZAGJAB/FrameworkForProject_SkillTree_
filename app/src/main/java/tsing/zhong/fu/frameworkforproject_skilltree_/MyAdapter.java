@@ -1,6 +1,7 @@
 package tsing.zhong.fu.frameworkforproject_skilltree_;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.loopj.android.http.HttpGet;
 
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -27,9 +32,12 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.utils.Loger;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<String> data;
-
-    public MyAdapter(List<String> data) {
+    private List<Courses> detail;
+    private Context mContext;
+    public MyAdapter(List<String> data,Context context) {
         this.data = data;
+        this.mContext = context;
+        detail = new ArrayList<Courses>();
     }
 
     private View.OnClickListener onClickListener = null;
@@ -44,18 +52,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
 
-        Courses c = new Courses(data.get(i));
+        if (i >= detail.size()) {
+            detail.add(i,new Courses(data.get(i),this,i));
+        }
+        Courses c = detail.get(i);
         viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogHelper.commit(MyApplication.mainActivity,null,null).show();
+                DialogHelper.commit(mContext,null,null).show();
             }
         });
+
+
         viewHolder.text.setText(c.getTitle());
+        viewHolder.kind.setText(c.getType());
+        viewHolder.text2.setText(c.getTitle2());
         int rd = Integer.parseInt(c.getPicName());
         viewHolder.main.setOnClickListener(this.onClickListener);
         switch (rd){
@@ -76,26 +90,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             default:
                 viewHolder.content.setBackgroundResource(R.drawable.card00);break;
         }
-        /*
-        switch (rd){
-            case 0:
-                viewHolder.content.setBackgroundColor(Color.rgb(0xB7, 0x1C, 0x1C));break;
-            case 1:
-                viewHolder.content.setBackgroundColor(Color.rgb(0x88, 0x0E, 0x4F));break;
-            case 2:
-                viewHolder.content.setBackgroundColor(Color.rgb(0x4A, 0x14, 0x8C));break;
-            case 3:
-                viewHolder.content.setBackgroundColor(Color.rgb(0x31, 0x1B, 0x92));break;
-            case 4:
-                viewHolder.content.setBackgroundColor(Color.rgb(0x1A, 0x23, 0x7E));break;
-            case 5:
-                viewHolder.content.setBackgroundColor(Color.rgb(0x00, 0x4D, 0x40));break;
-            case 6:
-                viewHolder.content.setBackgroundColor(Color.rgb(0x42, 0x42, 0x42));break;
-            default:
-                viewHolder.content.setBackgroundColor(Color.rgb(0x37, 0x47, 0x4F));break;
-        }
-        */
     }
 
     @Override
@@ -106,6 +100,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     static class ViewHolder extends RecyclerView.ViewHolder {
         View main;
         TextView text;
+        TextView kind;
+        TextView text2;
         ImageView imageView;
         LinearLayout content;
 
@@ -114,6 +110,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             super(itemView);
             main = itemView;
             text = (TextView) itemView.findViewById(R.id.text);
+            text2 = (TextView) itemView.findViewById(R.id.decription);
+            kind = (TextView) itemView.findViewById(R.id.kind);
             content = (LinearLayout) itemView.findViewById(R.id.contentPic);
             imageView = (ImageView) itemView.findViewById(R.id.card_icon_1);
         }

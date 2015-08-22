@@ -72,7 +72,7 @@ public class MainActivity extends ActionBarActivity {
             mRecyclerView.setHasFixedSize(true);
             layoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(layoutManager);
-            MyAdapter adapter = new MyAdapter(app.u.getCourseIdSet());
+            MyAdapter adapter = new MyAdapter(app.u.getCourseIdSet(),MainActivity.this);
             adapter.setOnClickListener(this.onClickListener);
             mRecyclerView.setAdapter(adapter);
 

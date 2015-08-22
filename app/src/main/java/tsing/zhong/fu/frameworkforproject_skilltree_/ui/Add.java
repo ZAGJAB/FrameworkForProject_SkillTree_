@@ -65,7 +65,7 @@ public class Add extends AppCompatActivity{
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         data = new ArrayList<>();
-        adapter = new MyAdapter(data);
+        adapter = new MyAdapter(data, Add.this);
         mRecyclerView.setAdapter(adapter);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.add_swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
