@@ -24,7 +24,7 @@ public class DialogHelper {
     static public MaterialDialog.Builder commit(Context context,
                                                 MaterialDialog.InputCallback inputCallback,
                                                 OnCancelListener onCancelListener) {
-        if (inputCallback==null) inputCallback = defalutInputCallback;
+        //if (inputCallback==null) inputCallback = defalutInputCallback;
         return new MaterialDialog
                   .Builder(context)
                   .title(R.string.input_commit)
@@ -95,12 +95,7 @@ public class DialogHelper {
             makeText("onNeutral");
         }
     };
-    static MaterialDialog.InputCallback defalutInputCallback = new MaterialDialog.InputCallback() {
-        @Override
-        public void onInput(MaterialDialog materialDialog, CharSequence charSequence) {
-            makeText("OnInput Callback");
-        }
-    };
+
 
     static void makeText(String msg) {
         Toast.makeText(MyApplication.mainActivity,msg,Toast.LENGTH_LONG).show();

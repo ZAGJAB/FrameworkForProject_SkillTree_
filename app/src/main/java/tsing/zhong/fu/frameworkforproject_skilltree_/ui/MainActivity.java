@@ -58,6 +58,7 @@ public class MainActivity extends ActionBarActivity {
     MaterialDialog.Builder  processBuilder;
     JSONArray               array;
     String                  pass;
+    MyAdapter               adapter;
     static int i = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,23 +73,18 @@ public class MainActivity extends ActionBarActivity {
             mRecyclerView.setHasFixedSize(true);
             layoutManager = new LinearLayoutManager(this);
             mRecyclerView.setLayoutManager(layoutManager);
-            MyAdapter adapter = new MyAdapter(app.u.getCourseIdSet(),MainActivity.this);
-            adapter.setOnClickListener(this.onClickListener);
+            adapter = new MyAdapter(app.u.getCourseIdSet(),MainActivity.this);
             mRecyclerView.setAdapter(adapter);
 
 
             swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+            swipeRefreshLayout.setEnabled(false);
             if (u.isOnline()) {
+                swipeRefreshLayout.setEnabled(true);
                 swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                                                             @Override
                                                             public void onRefresh() {
-                                                                new Handler().postDelayed(new Runnable() {
-                                                                    @Override
-                                                                    public void run() {
-                                                                        swipeRefreshLayout.setRefreshing(false);
-                                                                        u.addCourese(i++ + "");
-                                                                    }
-                                                                }, 3000);
+                                                                getProcess();
                                                             }
                                                         }
                 );
@@ -103,6 +99,13 @@ public class MainActivity extends ActionBarActivity {
                 }
             });
             refresh();
+        if (u.isOnline()) getProcess();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (u.isOnline()) getProcess();
     }
 
     @Override
@@ -288,7 +291,51 @@ public class MainActivity extends ActionBarActivity {
             if ("refresh".equals(msg.getData().getString("cmd"))) {
                 f_refresh();
             }
+            if ("refresh_list".equals(msg.getData().getString("cmd"))) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
         }
+    }
+
+    private void getProcess(){
+        swipeRefreshLayout.setRefreshing(true);
+        final List<String> data = u.getCourseIdSet();
+        NetUtil.get("?c=api&_table=collect&_interface=list&user_id="+u.getId(), null, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                u.getCourseIdSet().clear();
+                try {
+                    if (!response.get("data").equals(false)) {
+                        JSONArray jsonArray = response.getJSONObject("data").getJSONArray("items");
+                        for (int i = 0; i <jsonArray.length(); i++) {
+                            System.out.println(jsonArray.getJSONObject(i).getString("course_id"));
+                            u.getCourseIdSet().add(jsonArray.getJSONObject(i).getString("course_id"));
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.e("fzq","uid: "+u.getId());
+                for (String s:data) {
+                    Log.e("fzq","data: "+s);
+                }
+
+                adapter.notifyDataSetChanged();
+                Looper looper = Looper.getMainLooper();
+                Main_Handler handler = new Main_Handler(looper);
+                Message msg = handler.obtainMessage(1, 1, 1, "");
+                msg.getData().putString("cmd", "refresh_list");
+                handler.sendMessage(msg);
+                super.onSuccess(statusCode, headers, response);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Log.e("error",errorResponse.toString());
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+        });
     }
 
 }

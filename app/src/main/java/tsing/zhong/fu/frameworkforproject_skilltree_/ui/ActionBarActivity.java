@@ -50,7 +50,7 @@ public abstract class ActionBarActivity extends AppCompatActivity {
 
     private static final int DELAY_MILLIS = 1000;
 
-    User             u;
+    public User      u;
     MyApplication    app;
     TextView         settingTextView;
     TextView         logoutTextView;

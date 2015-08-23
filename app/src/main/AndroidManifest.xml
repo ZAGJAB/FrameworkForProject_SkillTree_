@@ -46,9 +46,6 @@
             android:label="朋友圈">
 
         </activity>
-        <activity android:name=".ui.Hot">
-
-        </activity>
         <activity android:name=".ui.About">
 
         </activity>

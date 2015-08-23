@@ -30,7 +30,9 @@ public class Courses {
     String title,title2,type;
     String picName;
     String id;
+    public boolean isInList;
     public Courses(String id, final MyAdapter sz, final int pos) {
+        isInList = false;
         //todo 根据id同步网络数据
         NetUtil.get("?c=api&_table=course&_interface=list&course_id="+id,null, new JsonHttpResponseHandler(){
             @Override
@@ -40,6 +42,7 @@ public class Courses {
                         JSONObject json = response.getJSONObject("data").getJSONArray("items").getJSONObject(0);
                         title = json.getString("course_name");
                         type  = kind[json.getInt("course_type_id")];
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -48,8 +51,8 @@ public class Courses {
                 super.onSuccess(statusCode, headers, response);
             }
         });
-        title = "id 为" + id + "的课程";
-        title2 = "点击查看详情";
+        title = "正在加载中...";
+        title2 = "";
         this.id = id;
         picName = new Random().nextInt(7) + "";
     }

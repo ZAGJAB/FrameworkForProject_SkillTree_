@@ -12,7 +12,7 @@ public class About extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        setContentView(R.layout.info);
         initializeToolbar();
 
     }

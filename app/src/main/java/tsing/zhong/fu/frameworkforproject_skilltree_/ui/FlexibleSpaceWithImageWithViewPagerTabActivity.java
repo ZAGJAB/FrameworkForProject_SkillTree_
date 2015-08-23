@@ -17,6 +17,7 @@
 package tsing.zhong.fu.frameworkforproject_skilltree_.ui;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.ksoichiro.android.observablescrollview.CacheFragmentStatePagerAdapter;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
@@ -38,26 +40,7 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.FlexibleSpaceWi
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.FlexibleSpaceWithImageRecyclerViewFragment;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.SlidingTabLayout;
 
-/**
- * <p>Another implementation of FlexibleImage pattern + ViewPager.</p>
- * <p/>
- * <p>This is a completely different approach comparing to FlexibleImageWithViewPager2Activity.
- * <p/>
- * <p>Descriptions of this pattern:</p>
- * <ul>
- * <li>When the current tab is changed, tabs will be translated in Y-axis
- * using scrollY of the new page's Fragment.</li>
- * <li>The parent Activity and children Fragments strongly depend on each other,
- * so if you need to use this pattern, maybe you should extract some interfaces from them.<br>
- * (This is just an example, so we won't do it here.)</li>
- * <li>The parent Activity and children Fragments communicate bidirectionally:
- * the parent Activity will update the Fragment's state when the tab is changed,
- * and Fragments will tell the parent Activity to update the tab's translationY.</li>
- * </ul>
- * <p/>
- * <p>SlidingTabLayout and SlidingTabStrip are from google/iosched:<br>
- * https://github.com/google/iosched</p>
- */
+
 public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity {
 
     protected static final float MAX_TEXT_SCALE_DELTA = 0.3f;
@@ -71,6 +54,8 @@ public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        Toast.makeText(FlexibleSpaceWithImageWithViewPagerTabActivity.this,intent.getStringExtra(),Toast.LENGTH_LONG).show();
         setContentView(R.layout.activity_flexiblespacewithimagewithviewpagertab);
 
         mPagerAdapter = new NavigationAdapter(getSupportFragmentManager());
