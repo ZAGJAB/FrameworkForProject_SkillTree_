@@ -31,6 +31,5 @@ dependencies {
     compile 'com.afollestad:material-dialogs:0.7.7.0'
     compile 'it.neokree:MaterialTabs:0.11'
     compile 'com.github.ksoichiro:android-observablescrollview:1.5.2'
-
-    //compile 'com.loopj.android:android-async-http:+'
+    compile 'com.loopj.android:android-async-http:1.4.8'
 }

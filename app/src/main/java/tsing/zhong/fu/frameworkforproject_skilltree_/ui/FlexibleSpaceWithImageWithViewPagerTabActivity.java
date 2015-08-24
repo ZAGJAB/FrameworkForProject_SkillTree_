@@ -34,6 +34,8 @@ import com.github.ksoichiro.android.observablescrollview.Scrollable;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
+import javax.sql.RowSet;
+
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.BaseActivity;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.FlexibleSpaceWithImageBaseFragment;
@@ -50,12 +52,15 @@ public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity
     private SlidingTabLayout mSlidingTabLayout;
     private int mFlexibleSpaceHeight;
     private int mTabHeight;
-
+    private static String cid,uid,tit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        Toast.makeText(FlexibleSpaceWithImageWithViewPagerTabActivity.this,intent.getStringExtra(),Toast.LENGTH_LONG).show();
+        Toast.makeText(FlexibleSpaceWithImageWithViewPagerTabActivity.this,intent.getStringExtra("uid"),Toast.LENGTH_LONG).show();
+        cid = intent.getStringExtra("cid");
+        uid = intent.getStringExtra("uid");
+        tit = intent.getStringExtra("tit");
         setContentView(R.layout.activity_flexiblespacewithimagewithviewpagertab);
 
         mPagerAdapter = new NavigationAdapter(getSupportFragmentManager());
@@ -65,11 +70,11 @@ public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity
         mTabHeight = getResources().getDimensionPixelSize(R.dimen.tab_height);
 
         TextView titleView = (TextView) findViewById(R.id.title);
-        titleView.setText(R.string.title_activity_about);
+        titleView.setText(tit);
 
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
-        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.colorAccent));
+        mSlidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.white));
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setViewPager(mPager);
 
@@ -80,17 +85,9 @@ public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity
                 translateTab(0, false);
             }
         });
+
     }
 
-    /**
-     * Called by children Fragments when their scrollY are changed.
-     * They all call this method even when they are inactive
-     * but this Activity should listen only the active child,
-     * so each Fragments will pass themselves for Activity to check if they are active.
-     *
-     * @param scrollY scroll position of Scrollable
-     * @param s       caller Scrollable view
-     */
     public void onScrollChanged(int scrollY, Scrollable s) {
         FlexibleSpaceWithImageBaseFragment fragment =
                 (FlexibleSpaceWithImageBaseFragment) mPagerAdapter.getItemAt(mPager.getCurrentItem());
@@ -204,7 +201,7 @@ public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity
      */
     private static class NavigationAdapter extends CacheFragmentStatePagerAdapter {
 
-        private static final String[] TITLES = new String[]{"Applepie", "Butter Cookie", "Cupcake", "Donut", "Eclair", "Froyo", "Gingerbread", "Honeycomb", "Ice Cream Sandwich", "Jelly Bean", "KitKat", "Lollipop"};
+        private static final String[] TITLES = new String[]{"内容","评论","属性"};
 
         private int mScrollY;
 
@@ -219,7 +216,7 @@ public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity
         @Override
         protected Fragment createItem(int position) {
             FlexibleSpaceWithImageBaseFragment f;
-            final int pattern = position % 4;
+            final int pattern = position % 3;
             switch (pattern) {
                 case 0: {
                     f = new FlexibleSpaceWithImageRecyclerViewFragment();
@@ -227,6 +224,7 @@ public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity
                 }
                 case 1: {
                     f = new FlexibleSpaceWithImageRecyclerViewFragment();
+                    f.setCid(cid);
                     break;
                 }
                 case 2: {
@@ -253,4 +251,5 @@ public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity
             return TITLES[position];
         }
     }
+
 }

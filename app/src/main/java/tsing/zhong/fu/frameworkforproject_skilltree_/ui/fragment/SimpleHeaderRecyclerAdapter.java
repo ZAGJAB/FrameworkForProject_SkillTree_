@@ -24,16 +24,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import tsing.zhong.fu.frameworkforproject_skilltree_.R;
 
 public class SimpleHeaderRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int VIEW_TYPE_HEADER = 0;
     private static final int VIEW_TYPE_ITEM = 1;
 
     private LayoutInflater mInflater;
-    private ArrayList<String> mItems;
+    private List<Data> mItems;
     private View mHeaderView;
 
-    public SimpleHeaderRecyclerAdapter(Context context, ArrayList<String> items, View headerView) {
+    public SimpleHeaderRecyclerAdapter(Context context, List<Data> items, View headerView) {
         mInflater = LayoutInflater.from(context);
         mItems = items;
         mHeaderView = headerView;
@@ -58,14 +61,16 @@ public class SimpleHeaderRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
         if (viewType == VIEW_TYPE_HEADER) {
             return new HeaderViewHolder(mHeaderView);
         } else {
-            return new ItemViewHolder(mInflater.inflate(android.R.layout.simple_list_item_1, parent, false));
+            return new ItemViewHolder(mInflater.inflate(R.layout.commit_mini, parent, false));
         }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof ItemViewHolder) {
-            ((ItemViewHolder) viewHolder).textView.setText(mItems.get(position - 1));
+            ((ItemViewHolder) viewHolder).uname.setText(mItems.get(position - 1).getName());
+            ((ItemViewHolder) viewHolder).date.setText(mItems.get(position - 1).getDate());
+            ((ItemViewHolder) viewHolder).content.setText(mItems.get(position - 1).getContent());
         }
     }
 
@@ -76,11 +81,14 @@ public class SimpleHeaderRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
     static class ItemViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
-
-        public ItemViewHolder(View view) {
-            super(view);
-            textView = (TextView) view.findViewById(android.R.id.text1);
+        TextView uname;
+        TextView date;
+        TextView content;
+        public ItemViewHolder(View itemView) {
+            super(itemView);
+            uname = (TextView) itemView.findViewById(R.id.user);
+            date  = (TextView) itemView.findViewById(R.id.date);
+            content = (TextView) itemView.findViewById(R.id.content);
         }
     }
 }

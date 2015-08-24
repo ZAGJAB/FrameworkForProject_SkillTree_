@@ -108,6 +108,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 Intent intent = new Intent(mActivity, FlexibleSpaceWithImageWithViewPagerTabActivity.class);
                 intent.putExtra("uid",u.getId());
                 intent.putExtra("cid",c.getId());
+                intent.putExtra("tit",c.getTitle());
                 mActivity.startActivity(intent);
             }
         });
@@ -139,10 +140,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     if (u.getCourseIdSet().indexOf(c.getId())!=-1) {
                         u.getCourseIdSet().remove(u.getCourseIdSet().indexOf(c.getId()));
                     }
-                    Log.e("fzq", "uid: " + u.getId());
-                    for (String s:u.getCourseIdSet()) {
-                        Log.e("fzq","data: "+s);
-                    }
 
                     notifyDataSetChanged();
                 } else {
@@ -151,10 +148,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                             u.getId()+"&course_id="+c.getId(),null,new JsonHttpResponseHandler());
                     u.getCourseIdSet().add(c.getId());
 
-                    Log.e("fzq", "uid: " + u.getId());
-                    for (String s:u.getCourseIdSet()) {
-                        Log.e("fzq","data: "+s);
-                    }
 
                     notifyDataSetChanged();
                 }

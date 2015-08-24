@@ -78,4 +78,7 @@ public abstract class FlexibleSpaceWithImageBaseFragment<S extends Scrollable> e
         View view = getView();
         return view == null ? null : (S) view.findViewById(R.id.scroll);
     }
+    public void setCid(String cid){
+
+    };
 }

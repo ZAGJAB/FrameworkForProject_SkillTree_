@@ -116,6 +116,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void setDummyDataWithHeader(RecyclerView recyclerView, View headerView) {
-        recyclerView.setAdapter(new SimpleHeaderRecyclerAdapter(this, getDummyData(), headerView));
+        //recyclerView.setAdapter(new SimpleHeaderRecyclerAdapter(this, getDummyData(), headerView));
     }
 }

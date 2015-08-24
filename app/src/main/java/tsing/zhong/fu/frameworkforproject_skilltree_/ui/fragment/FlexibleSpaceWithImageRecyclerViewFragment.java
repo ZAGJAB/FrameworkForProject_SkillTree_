@@ -23,16 +23,56 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nineoldandroids.view.ViewHelper;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.FlexibleSpaceWithImageWithViewPagerTabActivity;
+import tsing.zhong.fu.frameworkforproject_skilltree_.utils.NetUtil;
 
 public class FlexibleSpaceWithImageRecyclerViewFragment extends FlexibleSpaceWithImageBaseFragment<ObservableRecyclerView> {
 
+    SimpleHeaderRecyclerAdapter adapter;
+    String cid = null;
+    List<Data> ds;
+
+    public FlexibleSpaceWithImageRecyclerViewFragment() {
+        ds = new ArrayList<Data>();
+    }
+    @Override
+    public void setCid(String cid) {
+        this.cid = cid;
+        NetUtil.get("?c=api&_table=commet&_interface=list&course_id=" + cid, null, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    if (!response.getJSONObject("data").equals(false)) {
+                        JSONArray jsonarray = response.getJSONObject("data").getJSONArray("items");
+                        for (int i = 0; i < jsonarray.length(); ++i) {
+                            JSONObject jo = jsonarray.getJSONObject(i);
+                            ds.add(new Data(jo.getString("author_id"), jo.getString("time"), jo.getString("commet")));
+                        }
+                        adapter.notifyDataSetChanged();
+                   }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                super.onSuccess(statusCode, headers, response);
+            }
+        });
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_flexiblespacewithimagerecyclerview, container, false);
@@ -40,11 +80,10 @@ public class FlexibleSpaceWithImageRecyclerViewFragment extends FlexibleSpaceWit
         final ObservableRecyclerView recyclerView = (ObservableRecyclerView) view.findViewById(R.id.scroll);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(false);
-        final View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.recycler_header, null);
+       final View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.recycler_header, null);
         final int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         headerView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, flexibleSpaceImageHeight));
-        setDummyDataWithHeader(recyclerView, headerView);
-
+        adapter = setMydate(recyclerView, headerView,ds);
         // TouchInterceptionViewGroup should be a parent view other than ViewPager.
         // This is a workaround for the issue #117:
         // https://github.com/ksoichiro/Android-ObservableScrollView/issues/117
@@ -70,7 +109,6 @@ public class FlexibleSpaceWithImageRecyclerViewFragment extends FlexibleSpaceWit
         }
 
         recyclerView.setScrollViewCallbacks(this);
-
         return view;
     }
 
@@ -114,6 +152,63 @@ public class FlexibleSpaceWithImageRecyclerViewFragment extends FlexibleSpaceWit
                 (FlexibleSpaceWithImageWithViewPagerTabActivity) getActivity();
         if (parentActivity != null) {
             parentActivity.onScrollChanged(scrollY, (ObservableRecyclerView) view.findViewById(R.id.scroll));
+        }
+    }
+}
+class Data {
+    private String name,date,content;
+    public Data(String name,String date,String content) {
+        this.name = name;
+        this.date = date;
+        this.content = content;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getContent() {
+        return content;
+    }
+}
+class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+
+    List<Data> ds;
+    public Adapter(List<Data> data) {
+        this.ds = data;
+    }
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.commit_mini, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Data d = ds.get(position);
+        holder.uname.setText(d.getName());
+        holder.date.setText(d.getDate());
+        holder.content.setText(d.getContent());
+    }
+
+    @Override
+    public int getItemCount() {
+        return ds.size();
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder{
+        TextView uname;
+        TextView date;
+        TextView content;
+        public ViewHolder(View itemView) {
+            super(itemView);
+            uname = (TextView) itemView.findViewById(R.id.user);
+            date  = (TextView) itemView.findViewById(R.id.date);
+            content = (TextView) itemView.findViewById(R.id.content);
         }
     }
 }

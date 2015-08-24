@@ -29,6 +29,7 @@ import android.widget.ListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableGridView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
 
@@ -81,7 +82,9 @@ public abstract class BaseFragment extends Fragment {
         recyclerView.setAdapter(new SimpleRecyclerAdapter(getActivity(), getDummyData()));
     }
 
-    protected void setDummyDataWithHeader(RecyclerView recyclerView, View headerView) {
-        recyclerView.setAdapter(new SimpleHeaderRecyclerAdapter(getActivity(), getDummyData(), headerView));
+    protected SimpleHeaderRecyclerAdapter setMydate(RecyclerView recyclerView, View headerView,List<Data> data) {
+        SimpleHeaderRecyclerAdapter adapter = new SimpleHeaderRecyclerAdapter(getActivity(), data, headerView);
+        recyclerView.setAdapter(adapter);
+        return adapter;
     }
 }

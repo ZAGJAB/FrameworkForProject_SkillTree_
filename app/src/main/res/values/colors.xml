@@ -13,7 +13,8 @@
     <color name="fab_ripple">#ccc</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#3F51B5</color>
+    <color name="colorAccent">#184457c1</color>
+    <color name="white">#FFFFFF</color>
     <color name="drawer_item_selected_background">#feee</color>
     <color name="drawer_item_tint_color">#ff333333</color>
 
