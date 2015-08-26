@@ -1,5 +1,14 @@
 package tsing.zhong.fu.frameworkforproject_skilltree_.model;
 
+import com.loopj.android.http.HttpGet;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -104,4 +113,5 @@ public class UserResource extends UserResourceImpl {
     public int dislikeToCourse(String Cid) {
         return 0;
     }
+
 }

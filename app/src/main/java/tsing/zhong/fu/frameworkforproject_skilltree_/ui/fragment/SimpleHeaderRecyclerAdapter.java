@@ -18,15 +18,33 @@ package tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.loopj.android.http.HttpGet;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
+import tsing.zhong.fu.frameworkforproject_skilltree_.model.UserResource;
+import tsing.zhong.fu.frameworkforproject_skilltree_.utils.NetUtil;
 
 public class SimpleHeaderRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int VIEW_TYPE_HEADER = 0;
@@ -67,13 +85,17 @@ public class SimpleHeaderRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+
+       String uid = "",date = "";
         if (viewHolder instanceof ItemViewHolder) {
-            ((ItemViewHolder) viewHolder).uname.setText(mItems.get(position - 1).getName());
-            ((ItemViewHolder) viewHolder).date.setText(mItems.get(position - 1).getDate());
+            uid = mItems.get(position - 1).getName();
+            date = mItems.get(position - 1).getDate();
+            date = DateFormat.getDateTimeInstance().format(new Date(Long.parseLong(date)));
+            ((ItemViewHolder) viewHolder).uname.setText(uid);
+            ((ItemViewHolder) viewHolder).date.setText(date);
             ((ItemViewHolder) viewHolder).content.setText(mItems.get(position - 1).getContent());
         }
     }
-
     static class HeaderViewHolder extends RecyclerView.ViewHolder {
         public HeaderViewHolder(View view) {
             super(view);

@@ -34,10 +34,9 @@ import com.github.ksoichiro.android.observablescrollview.Scrollable;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
-import javax.sql.RowSet;
-
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.BaseActivity;
+import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.Flex_info;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.FlexibleSpaceWithImageBaseFragment;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.FlexibleSpaceWithImageRecyclerViewFragment;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.SlidingTabLayout;
@@ -220,18 +219,19 @@ public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity
             switch (pattern) {
                 case 0: {
                     f = new FlexibleSpaceWithImageRecyclerViewFragment();
+                    f.setCid(cid,uid);
                     break;
                 }
                 case 1: {
                     f = new FlexibleSpaceWithImageRecyclerViewFragment();
-                    f.setCid(cid);
+                    f.setCid(cid,uid);
                     break;
                 }
                 case 2: {
-                    f = new FlexibleSpaceWithImageRecyclerViewFragment();
+                    f = new Flex_info();
+                    f.setCid(cid,uid);
                     break;
                 }
-                case 3:
                 default: {
                     f = new FlexibleSpaceWithImageRecyclerViewFragment();
                     break;

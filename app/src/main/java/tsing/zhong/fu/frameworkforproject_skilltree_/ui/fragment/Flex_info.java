@@ -16,101 +16,91 @@
 
 package tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
-import com.loopj.android.http.AsyncHttpResponseHandler;
+
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.melnykov.fab.FloatingActionButton;
 import com.nineoldandroids.view.ViewHelper;
 
 import org.apache.http.Header;
+import org.eazegraph.lib.charts.BarChart;
+import org.eazegraph.lib.models.BarModel;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.FlexibleSpaceWithImageWithViewPagerTabActivity;
-import tsing.zhong.fu.frameworkforproject_skilltree_.utils.DialogHelper;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.NetUtil;
 
-public class FlexibleSpaceWithImageRecyclerViewFragment extends FlexibleSpaceWithImageBaseFragment<ObservableRecyclerView> {
 
-    SimpleHeaderRecyclerAdapter adapter;
+public class Flex_info extends FlexibleSpaceWithImageBaseFragment<ObservableRecyclerView> {
+
+    InfoRecyclerAdapter adapter;
     String cid = null,uid=null;
-    List<Data> ds;
+    List<InfoData> ds;
 
-    public FlexibleSpaceWithImageRecyclerViewFragment() {
-        ds = new ArrayList<Data>();
+    public Flex_info() {
+        ds = new ArrayList<InfoData>();
     }
     @Override
     public void setCid(String cid,String uid) {
         this.cid = cid;
         this.uid = uid;
-        NetUtil.get("?c=api&_table=commet&_interface=list&course_id=" + cid, null, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    if (!response.getJSONObject("data").equals(false)) {
-                        JSONArray jsonarray = response.getJSONObject("data").getJSONArray("items");
-                        for (int i = 0; i < jsonarray.length(); ++i) {
-                            JSONObject jo = jsonarray.getJSONObject(i);
-                            ds.add(new Data(jo.getString("author_id"), jo.getString("time"), jo.getString("commet")));
-                            final int finalI = i;
-                            NetUtil.get("?c=api&_table=user_data&_interface=getnickname&uid="+jo.getString("author_id"),null ,new JsonHttpResponseHandler(){
-                                @Override
-                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                    try {
-                                        ds.get(finalI).setName(response.getJSONArray("data").getJSONObject(0).getString("nickname"));
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                    if (adapter != null)
-                                    adapter.notifyDataSetChanged();
-                                    super.onSuccess(statusCode, headers, response);
-                                }
-                            });
-                        }
+        if (adapter != null){
+            NetUtil.get("?c=api&_table=course&_interface=getdata&course_id=" + this.cid + "&user_id=" + this.uid, null, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    try {
+                            JSONArray jsonArray = response.getJSONArray("data");
 
-                   }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                            if (!jsonArray.get(0).equals(false)) {
+                                ds.add(new InfoData("effort", jsonArray.getJSONArray(0).getJSONObject(0).getInt("effort")));
+                                ds.add(new InfoData("talent", jsonArray.getJSONArray(1).getJSONObject(0).getInt("talent")));
+                                ds.add(new InfoData("excited", jsonArray.getJSONArray(2).getJSONObject(0).getInt("excited")));
+                            }
+                            ds.add(new InfoData("学习人数", jsonArray.getJSONArray(3).getJSONObject(0).getInt("count")));
+                            if (jsonArray.get(4).equals(false)){
+                                ds.add(new InfoData("学习进度", -1));
+                            } else {
+                                ds.add(new InfoData("学习进度", jsonArray.getJSONArray(4).getJSONObject(0).getInt("course_state")));
+                            }
+                            adapter.notifyDataSetChanged();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    super.onSuccess(statusCode, headers, response);
                 }
-                super.onSuccess(statusCode, headers, response);
-            }
-        });
+            });
+        }
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_flexiblespacewithimagerecyclerview, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_flexiblespacewithimagerecyclerview_nofab, container, false);
 
         final ObservableRecyclerView recyclerView = (ObservableRecyclerView) view.findViewById(R.id.scroll);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(false);
-       final View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.recycler_header, null);
+        final View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.recycler_header, null);
         final int flexibleSpaceImageHeight = getResources().getDimensionPixelSize(R.dimen.flexible_space_image_height);
         headerView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, flexibleSpaceImageHeight));
-        adapter = setMydate(recyclerView, headerView,ds);
-        // TouchInterceptionViewGroup should be a parent view other than ViewPager.
-        // This is a workaround for the issue #117:
-        // https://github.com/ksoichiro/Android-ObservableScrollView/issues/117
+        adapter = new InfoRecyclerAdapter(getActivity(), ds, headerView);
+        recyclerView.setAdapter(adapter);
         recyclerView.setTouchInterceptionViewGroup((ViewGroup) view.findViewById(R.id.fragment_root));
 
-        // Scroll to the specified offset after layout
         Bundle args = getArguments();
         if (args != null && args.containsKey(ARG_SCROLL_Y)) {
             final int scrollY = args.getInt(ARG_SCROLL_Y, 0);
@@ -130,31 +120,7 @@ public class FlexibleSpaceWithImageRecyclerViewFragment extends FlexibleSpaceWit
         }
 
         recyclerView.setScrollViewCallbacks(this);
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogHelper.commit(getActivity(), new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(MaterialDialog materialDialog, CharSequence charSequence) {
-                        NetUtil.post("?c=api&_table=commet&_interface=insert&course_id=" + cid + "&author_id=" + uid + "&commet="
-                                + charSequence.toString() + "&time=" + new Date().getTime(), null, new AsyncHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                                Toast.makeText(getActivity(), "评论成功", Toast.LENGTH_LONG).show();
-                                adapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                                Toast.makeText(getActivity(), "评论失败", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
-                }, null).show();
-            }
-        });
-        setCid(cid,uid);
+        setCid(this.cid,this.uid);
         return view;
     }
 
@@ -200,14 +166,90 @@ public class FlexibleSpaceWithImageRecyclerViewFragment extends FlexibleSpaceWit
             parentActivity.onScrollChanged(scrollY, (ObservableRecyclerView) view.findViewById(R.id.scroll));
         }
     }
+
 }
-class Data {
-    private String name,date,content;
-    public Data(String name,String date,String content) {
-        this.name = name;
-        this.date = date;
-        this.content = content;
+
+class InfoRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final int VIEW_TYPE_HEADER = 0;
+    private static final int VIEW_TYPE_ITEM = 1;
+
+    private LayoutInflater mInflater;
+    private List<InfoData> mItems;
+    private View mHeaderView;
+
+    public InfoRecyclerAdapter(Context context, List<InfoData> items, View headerView) {
+        mInflater = LayoutInflater.from(context);
+        mItems = items;
+        mHeaderView = headerView;
     }
+
+    @Override
+    public int getItemCount() {
+        if (mHeaderView == null) {
+            return 1;
+        } else {
+            return 1 + 1;
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return (position == 0) ? VIEW_TYPE_HEADER : VIEW_TYPE_ITEM;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == VIEW_TYPE_HEADER) {
+            return new HeaderViewHolder(mHeaderView);
+        } else {
+            return new ItemViewHolder(mInflater.inflate(R.layout.course_info, parent, false));
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+
+        if (viewHolder instanceof ItemViewHolder) {
+            BarChart chart = ((ItemViewHolder) viewHolder).chart;
+            int[] colors = {
+                     0xFFF44336
+                    ,0xFF3F51B5
+                    ,0xFF009688
+                    ,0xFF2196F3
+                    ,0xFF9C27B0};
+            for (int i = 0;i<mItems.size();++i) {
+                chart.addBar(new BarModel(
+                        mItems.get(i).getName(),
+                        mItems.get(i).getV(), colors[i]));
+            }
+            chart.startAnimation();
+            //uid = mItems.get(position - 1).getName();
+            //date = mItems.get(position - 1).getDate();
+            //date = DateFormat.getDateTimeInstance().format(new Date(Long.parseLong(date)));
+            //((ItemViewHolder) viewHolder).content.setText(mItems.get(position - 1).getContent());
+        }
+    }
+    static class HeaderViewHolder extends RecyclerView.ViewHolder {
+        public HeaderViewHolder(View view) {
+            super(view);
+        }
+    }
+
+    static class ItemViewHolder extends RecyclerView.ViewHolder {
+        BarChart chart;
+        public ItemViewHolder(View itemView) {
+           super(itemView);
+           chart = (BarChart) itemView.findViewById(R.id.barchart);
+        }
+    }
+}
+class InfoData {
+    InfoData(String name,int data) {
+        this.name = name;
+        this.v    = data;
+    }
+    private String name;
+    private int    v;
 
     public String getName() {
         return name;
@@ -217,11 +259,12 @@ class Data {
         this.name = name;
     }
 
-    public String getDate() {
-        return date;
+    public int getV() {
+        return v;
     }
 
-    public String getContent() {
-        return content;
+    public void setV(int v) {
+        this.v = v;
     }
 }
+

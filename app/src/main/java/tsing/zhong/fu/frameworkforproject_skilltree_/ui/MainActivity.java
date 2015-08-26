@@ -38,6 +38,7 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.MyAdapter;
 import tsing.zhong.fu.frameworkforproject_skilltree_.MyApplication;
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
 import tsing.zhong.fu.frameworkforproject_skilltree_.model.User;
+import tsing.zhong.fu.frameworkforproject_skilltree_.model.UserResource;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.DialogHelper;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.NetUtil;
 
@@ -55,7 +56,7 @@ public class MainActivity extends ActionBarActivity {
     FloatingActionButton    fab;
     TextView                waring;
     FrameLayout             frameLayout;
-    MaterialDialog.Builder  processBuilder;
+    MaterialDialog          login,processBuilder;
     JSONArray               array;
     String                  pass;
     MyAdapter               adapter;
@@ -129,7 +130,7 @@ public class MainActivity extends ActionBarActivity {
             //    break;
             case R.id.action_login:
                 //startActivity(new Intent(MainActivity.this,LoginActivity.class));
-                DialogHelper.login(this,myCallback).show();
+                login = DialogHelper.login(this,myCallback).show();
                 break;
             //case R.id.action_logout:
             //    u.Logout();
@@ -148,9 +149,8 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onPositive(final MaterialDialog dialog) {
             if (processBuilder == null) {
-                processBuilder = DialogHelper.process(MainActivity.this);
+                processBuilder = DialogHelper.process(MainActivity.this).show();
             }
-            processBuilder.show();
             super.onPositive(dialog);
             LinearLayout v = (LinearLayout)dialog.getCustomView();
             EditText user = null;
@@ -167,7 +167,7 @@ public class MainActivity extends ActionBarActivity {
                                 @Override
                                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                                     //processBuilder = null;
-                                    processBuilder.autoDismiss(true);
+                                    processBuilder.dismiss();
                                     sendToastMessage("通信失败");
                                     f_refresh();
                                     super.onFailure(statusCode, headers, throwable, errorResponse);
@@ -207,7 +207,7 @@ public class MainActivity extends ActionBarActivity {
                                                                             u.setUname(jdata.getString("nickname"));
                                                                             u.setSig(jdata.getString("sig"));
                                                                         } else {
-                                                                            NetUtil.post("http://apiapiapi.sinaapp.com/?c=api&_table=user_data&_interface=ins&nickname="+u.getAccount()+"&sig=写点什么吧!"+"&user_id="+u.getId()+"&token="+u.getUtoken(),null,new JsonHttpResponseHandler(){
+                                                                            NetUtil.post("?c=api&_table=user_data&_interface=Ins&nickname="+u.getAccount()+"&sig=写点什么吧!"+"&user_id="+u.getId()+"&token="+u.getUtoken(),null,new JsonHttpResponseHandler(){
                                                                             });
                                                                             u.setUname(u.getAccount());
                                                                             u.setSig("写点什么吧！");
@@ -297,6 +297,13 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    void f_refresh() {
+        if (login != null) login.dismiss();
+        if (processBuilder != null) processBuilder.dismiss();
+        super.f_refresh();
+    }
+
     private void getProcess(){
         swipeRefreshLayout.setRefreshing(true);
         final List<String> data = u.getCourseIdSet();
@@ -316,10 +323,6 @@ public class MainActivity extends ActionBarActivity {
                     e.printStackTrace();
                 }
 
-                Log.e("fzq","uid: "+u.getId());
-                for (String s:data) {
-                    Log.e("fzq","data: "+s);
-                }
 
                 adapter.notifyDataSetChanged();
                 Looper looper = Looper.getMainLooper();

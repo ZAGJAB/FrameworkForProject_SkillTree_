@@ -54,7 +54,8 @@ public class DialogHelper {
                   .negativeText("注册")
                   .positiveText("登陆")
                   .cancelable(true)
-                  .callback(callback);
+                  .callback(callback)
+                .autoDismiss(true);
     }
     static public MaterialDialog.Builder process(Context context) {
         return new MaterialDialog
@@ -62,7 +63,7 @@ public class DialogHelper {
                 .title("登陆")
                 .content("登陆中,请等待...")
                 .progress(true,0)
-                //.autoDismiss(false)
+                .autoDismiss(false)
                 .cancelable(false);
     }
     /**

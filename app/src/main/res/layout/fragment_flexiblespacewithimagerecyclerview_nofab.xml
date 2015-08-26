@@ -14,16 +14,4 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:scrollbars="none" />
-    <com.melnykov.fab.FloatingActionButton
-        xmlns:fab="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:src="@drawable/ic_add_white_48dp"
-        android:layout_margin="16dp"
-        android:elevation="5dp"
-        fab:fab_colorNormal="@color/fab_primary"
-        fab:fab_colorPressed="@color/fab_primary_pressed"
-        fab:fab_colorRipple="@color/fab_ripple" />
 </FrameLayout>
