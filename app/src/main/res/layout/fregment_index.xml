@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/headpic"
+        android:src="@drawable/look_moutian_liu"
+        android:scaleType="fitXY"
+        app:riv_corner_radius="30dip"
+        app:riv_border_width="3dip"
+        app:riv_border_color="#FFFFFF"
+        app:riv_mutate_background="true"
+        app:riv_tile_mode="clamp"
+        app:riv_oval="true"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="26dp"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="26dp"
+        android:textColor="@color/white"
+        android:text="Large Text"
+        android:id="@+id/nickname_nikename"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginTop="12dp"
+        android:textColor="#cccccc"
+        android:text="Medium Text"
+        android:id="@+id/sig_index"
+        android:layout_gravity="center_horizontal" />
+    <org.eazegraph.lib.charts.BarChart
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/barchart_index"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:padding="10dp"
+        app:egFixedBarWidth="true"
+        app:egBarWidth="36dp"
+        app:egLegendHeight="40dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="已学课程"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>
+    </ScrollView>

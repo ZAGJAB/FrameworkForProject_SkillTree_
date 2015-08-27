@@ -39,6 +39,7 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.ui.MainActivity;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.DialogHelper;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.Loger;
 import tsing.zhong.fu.frameworkforproject_skilltree_.utils.NetUtil;
+import tsing.zhong.fu.frameworkforproject_skilltree_.utils.Util;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<String> data;
@@ -112,24 +113,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 mActivity.startActivity(intent);
             }
         });
-        switch (rd){
-            case 0:
-                viewHolder.content.setBackgroundResource(R.drawable.card00);break;
-            case 1:
-                viewHolder.content.setBackgroundResource(R.drawable.card01);break;
-            case 2:
-                viewHolder.content.setBackgroundResource(R.drawable.card02);break;
-            case 3:
-                viewHolder.content.setBackgroundResource(R.drawable.card03);break;
-            case 4:
-                viewHolder.content.setBackgroundResource(R.drawable.card04);break;
-            case 5:
-                viewHolder.content.setBackgroundResource(R.drawable.card05);break;
-            case 6:
-                viewHolder.content.setBackgroundResource(R.drawable.card06);break;
-            default:
-                viewHolder.content.setBackgroundResource(R.drawable.card00);break;
-        }
+        viewHolder.content.setBackgroundResource(Util.bgrd(rd));
         viewHolder.imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

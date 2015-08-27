@@ -61,6 +61,7 @@ public class FlexibleSpaceWithImageRecyclerViewFragment extends FlexibleSpaceWit
     public void setCid(String cid,String uid) {
         this.cid = cid;
         this.uid = uid;
+        ds.clear();
         NetUtil.get("?c=api&_table=commet&_interface=list&course_id=" + cid, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -70,22 +71,20 @@ public class FlexibleSpaceWithImageRecyclerViewFragment extends FlexibleSpaceWit
                         for (int i = 0; i < jsonarray.length(); ++i) {
                             JSONObject jo = jsonarray.getJSONObject(i);
                             ds.add(new Data(jo.getString("author_id"), jo.getString("time"), jo.getString("commet")));
-                            final int finalI = i;
                             NetUtil.get("?c=api&_table=user_data&_interface=getnickname&uid="+jo.getString("author_id"),null ,new JsonHttpResponseHandler(){
                                 @Override
                                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                     try {
-                                        ds.get(finalI).setName(response.getJSONArray("data").getJSONObject(0).getString("nickname"));
+                                        ds.get(ds.size()-1).setName(response.getJSONArray("data").getJSONObject(0).getString("nickname"));
+                                        if (adapter != null)
+                                            adapter.notifyDataSetChanged();
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
-                                    if (adapter != null)
-                                    adapter.notifyDataSetChanged();
                                     super.onSuccess(statusCode, headers, response);
                                 }
                             });
                         }
-
                    }
                 } catch (JSONException e) {
                     e.printStackTrace();

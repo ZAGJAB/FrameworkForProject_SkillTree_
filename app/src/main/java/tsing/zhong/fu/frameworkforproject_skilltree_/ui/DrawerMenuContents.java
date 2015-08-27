@@ -50,7 +50,7 @@ public class DrawerMenuContents {
                 R.drawable.ic_star_rate_black_18dp));
 
         activities[3] = Message.class;
-        items.add(populateDrawerItem("系统消息",
+        items.add(populateDrawerItem("我的收藏",
                 R.drawable.ic_star_rate_black_18dp));
 
     }

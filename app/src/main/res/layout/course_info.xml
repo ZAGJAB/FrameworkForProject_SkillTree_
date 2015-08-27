@@ -13,5 +13,4 @@
         app:egBarWidth="36dp"
         app:egLegendHeight="40dp"/>
 
-
 </LinearLayout>

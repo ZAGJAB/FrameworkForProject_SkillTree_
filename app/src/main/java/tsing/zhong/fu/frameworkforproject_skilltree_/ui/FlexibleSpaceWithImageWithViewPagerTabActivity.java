@@ -25,6 +25,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.Flex_info;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.FlexibleSpaceWithImageBaseFragment;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.FlexibleSpaceWithImageRecyclerViewFragment;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.SlidingTabLayout;
+import tsing.zhong.fu.frameworkforproject_skilltree_.utils.Util;
 
 
 public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity {
@@ -56,12 +58,12 @@ public class FlexibleSpaceWithImageWithViewPagerTabActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        Toast.makeText(FlexibleSpaceWithImageWithViewPagerTabActivity.this,intent.getStringExtra("uid"),Toast.LENGTH_LONG).show();
         cid = intent.getStringExtra("cid");
         uid = intent.getStringExtra("uid");
         tit = intent.getStringExtra("tit");
         setContentView(R.layout.activity_flexiblespacewithimagewithviewpagertab);
-
+        ImageView image = (ImageView) findViewById(R.id.image);
+        image.setImageResource(Util.bgrd(Integer.parseInt(cid)));
         mPagerAdapter = new NavigationAdapter(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mPagerAdapter);

@@ -54,7 +54,7 @@ public class Courses {
         title = "正在加载中...";
         title2 = "";
         this.id = id;
-        picName = new Random().nextInt(7) + "";
+        picName = Integer.parseInt(id) % 7 +"";
     }
 
     public String getTitle() {

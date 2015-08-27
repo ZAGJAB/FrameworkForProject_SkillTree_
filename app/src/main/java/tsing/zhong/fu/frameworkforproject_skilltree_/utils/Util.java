@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import tsing.zhong.fu.frameworkforproject_skilltree_.R;
+
 /**
  * Created by fuzho on 2015/8/18.
  */
@@ -24,5 +26,25 @@ public class Util {
             hex.append(Integer.toHexString(b & 0xFF));
         }
         return hex.toString();
+    }
+    public static int bgrd(int x) {
+        switch (x % 7) {
+            case 0:
+                return R.drawable.card00;
+            case 1:
+                return R.drawable.card01;
+            case 2:
+                return R.drawable.card02;
+            case 3:
+                return R.drawable.card03;
+            case 4:
+                return R.drawable.card04;
+            case 5:
+                return R.drawable.card05;
+            case 6:
+                return R.drawable.card06;
+            default:
+                return R.drawable.card00;
+        }
     }
 }

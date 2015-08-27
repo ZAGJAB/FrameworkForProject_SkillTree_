@@ -46,12 +46,21 @@
             android:label="朋友圈">
 
         </activity>
-        <activity android:name=".ui.About">
+        <activity android:name=".ui.About"
+            android:label="我的信息">
 
         </activity>
+        <activity android:name=".ui.fav"
+            android:label="添加到我的收藏"
+            android:theme="@style/MDThemeActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.Message"
-            android:label="消息">
-
+            android:label="我的收藏">
         </activity>
         <activity android:name=".ui.Add"
             android:theme="@style/MDThemeActionBar"

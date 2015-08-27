@@ -1,15 +1,20 @@
 package tsing.zhong.fu.frameworkforproject_skilltree_.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import java.util.ArrayList;
+
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
 import tsing.zhong.fu.frameworkforproject_skilltree_.R;
+import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.FragmentFav;
 import tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.FragmentText;
 
 /**
@@ -28,6 +33,7 @@ public class Message extends ActionBarActivity implements MaterialTabListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.message);
         initializeToolbar();
+
 
         tabHost = (MaterialTabHost) this.findViewById(R.id.tabHost);
         pager = (ViewPager) this.findViewById(R.id.pager );
@@ -76,7 +82,11 @@ public class Message extends ActionBarActivity implements MaterialTabListener {
         }
 
         public Fragment getItem(int num) {
-            return new FragmentText(num);
+            if (num == 1) {
+                return new FragmentFav(num + "");
+            } else {
+                return new FragmentFav(num + "");
+            }
         }
 
         @Override
@@ -88,9 +98,10 @@ public class Message extends ActionBarActivity implements MaterialTabListener {
         public CharSequence getPageTitle(int position) {
             String[] s = new String[2];
             s[0] = "已读消息";
-            s[1] = "未读消息";
+            s[1] = "创建的课程";
             return s[position];
         }
 
     }
+
 }

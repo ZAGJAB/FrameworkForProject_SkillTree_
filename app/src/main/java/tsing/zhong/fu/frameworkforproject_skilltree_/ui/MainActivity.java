@@ -79,9 +79,11 @@ public class MainActivity extends ActionBarActivity {
 
 
             swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-            swipeRefreshLayout.setEnabled(false);
+            if (swipeRefreshLayout!=null)swipeRefreshLayout.setEnabled(false);
             if (u.isOnline()) {
-                swipeRefreshLayout.setEnabled(true);
+                if (swipeRefreshLayout != null) {
+                    swipeRefreshLayout.setEnabled(true);
+                }
                 swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                                                             @Override
                                                             public void onRefresh() {
@@ -206,6 +208,9 @@ public class MainActivity extends ActionBarActivity {
                                                                             JSONObject jdata = data.getJSONObject(0);
                                                                             u.setUname(jdata.getString("nickname"));
                                                                             u.setSig(jdata.getString("sig"));
+                                                                            u.setV1(jdata.getString("effort"));
+                                                                            u.setV2(jdata.getString("talent"));
+                                                                            u.setV3(jdata.getString("excited"));
                                                                         } else {
                                                                             NetUtil.post("?c=api&_table=user_data&_interface=Ins&nickname="+u.getAccount()+"&sig=写点什么吧!"+"&user_id="+u.getId()+"&token="+u.getUtoken(),null,new JsonHttpResponseHandler(){
                                                                             });
@@ -315,8 +320,8 @@ public class MainActivity extends ActionBarActivity {
                     if (!response.get("data").equals(false)) {
                         JSONArray jsonArray = response.getJSONObject("data").getJSONArray("items");
                         for (int i = 0; i <jsonArray.length(); i++) {
-                            System.out.println(jsonArray.getJSONObject(i).getString("course_id"));
-                            u.getCourseIdSet().add(jsonArray.getJSONObject(i).getString("course_id"));
+                            System.out.println(jsonArray.getJSONObject(i).getInt("course_id"));
+                            u.getCourseIdSet().add(jsonArray.getJSONObject(i).getInt("course_id")+"");
                         }
                     }
                 } catch (JSONException e) {

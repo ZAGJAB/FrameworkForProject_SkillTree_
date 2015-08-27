@@ -9,8 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import tsing.zhong.fu.frameworkforproject_skilltree_.R;
+
 /**
  * Created by neokree on 16/12/14.
+ *
  */
 public class FragmentText extends Fragment{
     int num;
@@ -19,6 +22,8 @@ public class FragmentText extends Fragment{
     }
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_flexiblespacewithimagerecyclerview, container, false);
+
         TextView text = new TextView(container.getContext());
         String[] s = new String[3];
         s[0] = "好友动态";

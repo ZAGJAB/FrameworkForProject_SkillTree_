@@ -32,6 +32,7 @@ public class Friends extends ActionBarActivity implements MaterialTabListener {
         initializeToolbar();
 
         tabHost = (MaterialTabHost) this.findViewById(R.id.tabHost);
+        tabHost.setAccentColor(R.color.white);
         pager = (ViewPager) this.findViewById(R.id.pager );
 
         // init view pager

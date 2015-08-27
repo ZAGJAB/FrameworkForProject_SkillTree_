@@ -18,6 +18,7 @@ package tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -51,7 +52,7 @@ public class Flex_info extends FlexibleSpaceWithImageBaseFragment<ObservableRecy
     InfoRecyclerAdapter adapter;
     String cid = null,uid=null;
     List<InfoData> ds;
-
+    SwipeRefreshLayout swipeRefreshLayout;
     public Flex_info() {
         ds = new ArrayList<InfoData>();
     }
@@ -71,12 +72,13 @@ public class Flex_info extends FlexibleSpaceWithImageBaseFragment<ObservableRecy
                                 ds.add(new InfoData("talent", jsonArray.getJSONArray(1).getJSONObject(0).getInt("talent")));
                                 ds.add(new InfoData("excited", jsonArray.getJSONArray(2).getJSONObject(0).getInt("excited")));
                             }
-                            ds.add(new InfoData("学习人数", jsonArray.getJSONArray(3).getJSONObject(0).getInt("count")));
+                            ds.add(new InfoData("学习人数", jsonArray.getJSONArray(3).getJSONObject(0).getInt("COUNT(*)")));
                             if (jsonArray.get(4).equals(false)){
                                 ds.add(new InfoData("学习进度", -1));
                             } else {
                                 ds.add(new InfoData("学习进度", jsonArray.getJSONArray(4).getJSONObject(0).getInt("course_state")));
                             }
+                        if (swipeRefreshLayout != null) swipeRefreshLayout.setRefreshing(false);
                             adapter.notifyDataSetChanged();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -90,7 +92,6 @@ public class Flex_info extends FlexibleSpaceWithImageBaseFragment<ObservableRecy
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_flexiblespacewithimagerecyclerview_nofab, container, false);
-
         final ObservableRecyclerView recyclerView = (ObservableRecyclerView) view.findViewById(R.id.scroll);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(false);
