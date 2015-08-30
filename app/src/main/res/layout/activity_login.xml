@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="tsing.zhong.fu.frameworkforproject_skilltree_.ui.LoginActivity">
+    tools:context="edu.qust.vice.project.ui.LoginActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

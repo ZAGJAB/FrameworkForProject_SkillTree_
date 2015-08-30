@@ -67,7 +67,7 @@
             android:background="@android:color/transparent" />
     </LinearLayout>
 
-    <tsing.zhong.fu.frameworkforproject_skilltree_.ui.fragment.SlidingTabLayout
+    <edu.qust.vice.project.ui.fragment.SlidingTabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_height"

@@ -3,15 +3,15 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="tsing.zhong.fu.frameworkforproject_skilltree_.ui.SettingsActivity$GeneralPreferenceFragment"
+        android:fragment="edu.qust.vice.project.ui.SettingsActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
 
     <header
-        android:fragment="tsing.zhong.fu.frameworkforproject_skilltree_.ui.SettingsActivity$NotificationPreferenceFragment"
+        android:fragment="edu.qust.vice.project.ui.SettingsActivity$NotificationPreferenceFragment"
         android:title="@string/pref_header_notifications" />
 
     <header
-        android:fragment="tsing.zhong.fu.frameworkforproject_skilltree_.ui.SettingsActivity$DataSyncPreferenceFragment"
+        android:fragment="edu.qust.vice.project.ui.SettingsActivity$DataSyncPreferenceFragment"
         android:title="@string/pref_header_data_sync" />
 
 </preference-headers>

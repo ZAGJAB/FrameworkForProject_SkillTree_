@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="tsing.zhong.fu.frameworkforproject_skilltree_.ui.ListActivity">
+    tools:context="edu.qust.vice.project.ui.ListActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

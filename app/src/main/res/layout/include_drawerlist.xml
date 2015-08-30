@@ -14,7 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-<tsing.zhong.fu.frameworkforproject_skilltree_.ui.ScrimInsetsRelativeLayout
+<edu.qust.vice.project.ui.ScrimInsetsRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="290dp"
@@ -135,4 +135,4 @@
 
         </LinearLayout>
     </LinearLayout>
-    </tsing.zhong.fu.frameworkforproject_skilltree_.ui.ScrimInsetsRelativeLayout>
+    </edu.qust.vice.project.ui.ScrimInsetsRelativeLayout>
