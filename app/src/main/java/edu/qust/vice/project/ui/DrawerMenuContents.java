@@ -40,7 +40,7 @@ public class DrawerMenuContents {
                 R.drawable.ic_list_black_48dp));
 
         activities[1] = Friends.class;
-        items.add(populateDrawerItem("朋友圈",
+        items.add(populateDrawerItem("我的好友",
                 R.drawable.ic_star_rate_black_18dp));
 
 

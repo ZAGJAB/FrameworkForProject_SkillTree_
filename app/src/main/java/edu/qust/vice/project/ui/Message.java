@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import edu.qust.vice.project.ui.fragment.NewFav;
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
@@ -53,6 +54,7 @@ public class Message extends ActionBarActivity implements MaterialTabListener {
             );
 
         }
+        refresh();
     }
 
     @Override
@@ -75,10 +77,10 @@ public class Message extends ActionBarActivity implements MaterialTabListener {
             super(fm);
         }
         public Fragment getItem(int num) {
-            if (num == 1) {
-                return new FragmentFav(num + "");
+            if (num == 0) {
+                return new FragmentFav();
             } else {
-                return new FragmentFav(num + "");
+                return new NewFav();
             }
         }
 
@@ -90,8 +92,8 @@ public class Message extends ActionBarActivity implements MaterialTabListener {
         @Override
         public CharSequence getPageTitle(int position) {
             String[] s = new String[2];
-            s[0] = "已读消息";
-            s[1] = "创建的课程";
+            s[0] = "我的课程";
+            s[1] = "创建课程";
             return s[position];
         }
 
